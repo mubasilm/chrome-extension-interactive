@@ -376,7 +376,7 @@ const pl=(t,c='')=>`<span class="pl ${c}">${t}</span>`;
 const st=n=>`<span class="stz">${[1,2,3].map(i=>I('star','f'+(i>n?' o':''))).join('')}</span>`;
 const AIK='su fu rk fi il ch pm',GK='fi il ch pm';
 let S;
-const init=()=>S={tab:'home',d:'globex',o:new Set(),g:{},hc:new Set(),rg:1,ch:null,cc:1,lang:'English',menu:null,mf:'Inbox',mo:null,mq:'',rp:0,rt:'',star:new Set([0,4]),rd:new Set(),tx:'',dq:'',lq:'',cq:'',cf:0,cp:[],fq:'',done:new Set(),grid:0,key:1,po:1,tour:0,cn:new Set(['Salesforce','Gmail']),v:'mail',cm:null,cpo:null,ctq:'',rv:0,rf:'All',rr:null,ctx:0,tmy:1,ttm:1,tq:'',te:null,ep:null,mp:null,wk:1,rs:{},ctc:new Set(),sp:new Set([0,1])};
+const init=()=>S={tab:'home',d:'globex',o:new Set(),g:{},hc:new Set(),rg:1,ch:null,cc:1,lang:'English',menu:null,mf:'Inbox',mo:null,mq:'',rp:0,rt:'',star:new Set([0,4]),rd:new Set(),tx:'',dq:'',lq:'',cq:'',cf:0,cp:[],fq:'',done:new Set(),grid:0,key:1,po:0,tour:0,cn:new Set(['Salesforce','Gmail']),v:'mail',cm:null,cpo:null,ctq:'',rv:0,rf:'All',rr:null,ctx:0,tmy:1,ttm:1,tq:'',te:null,ep:null,mp:null,wk:1,rs:{},ctc:new Set(),sp:new Set([0,1])};
 const $=s=>R.querySelector(s);
 const W=ms=>new Promise(r=>setTimeout(r,ms));
 let tt;const toast=m=>{const t=$('.ts');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)};
@@ -599,7 +599,7 @@ await go('[data-a="ctp"]',[16,'Email templates','Use your own templates or ones 
 await go('textarea[data-i="tx"]',[17,'Ask Nucleus','Nucleus answers from your content, CRM and calls, and can write or enrich your email.']);await typ('textarea[data-i="tx"]','Draft a short pitch for Lena on governance',v=>S.tx=v);await go('[data-a="send"]');await wait();await go('[data-a="ins"]');await W(900);
 await go('[data-a="plus"]');await go('[data-v="skills"]');await on('.pop.s2',[18,'Prompts and skills','Saved prompts and skills turn deal data into ready-to-send work.'],'l');S.menu=null;rCmp();
 await go('[data-a="csend"]',[19,'Send and track','Opens and clicks are tracked, with an alert in Slack or Teams.']);await W(1600)}
-if(which!='mail'){TL='Calendar';TN=15;TPR='cal';trL();if(which=='cal')await W(500);
+if(which!='mail'){TL='Calendar';TN=15;TPR='cal';trL();S.po=0;S.ch=null;S.rv=0;S.mp=null;rPanel();if(which=='cal')await W(500);
 await go('[data-a="app"][data-v="cal"]',[1,'Open your calendar','Meeting Prep lives in every customer meeting invite.']);
 await go(`[data-a="ev"][data-v="${GI}"]`,[2,'Open the meeting invite','Any meeting with customer guests gets a Meeting Prep button.']);
 await go('[data-a="prep"]',[3,'Click Meeting Prep','Everything for this meeting opens in one panel.']);await W(400);
