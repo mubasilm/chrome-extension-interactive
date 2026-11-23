@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTM Buddy Extension Demo</title>
+<meta name="description" content="Interactive demo of the GTM Buddy extension: Meeting Prep, recommended content, templates and Nucleus, right inside the inbox and calendar.">
+<meta property="og:title" content="GTM Buddy Extension Demo">
+<meta property="og:description" content="Meeting Prep, recommended content, templates and Nucleus, right inside the inbox and calendar.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#003013">
+<link rel="icon" type="image/svg+xml" href="/assets/gtmbuddy-logo.svg">
+<style>
+html,body{margin:0;min-height:100%;background:#003013}
+body{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px 20px;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{width:100%;max-width:1240px}
+</style>
+</head>
+<body>
+<main>
+<div id="gbx"></div>
+<style>
+#gbx{--b:#3478f6;--bl:#eaf2ff;--t:#1d2129;--m:#6b7280;--l:#e6e8eb;--s:#f3f4f6;--p:#6d5df6;--g:#4cc77c;container-type:inline-size;font:14px/1.45 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--t);max-width:1240px;margin:0 auto;-webkit-font-smoothing:antialiased;text-align:left}
+#gbx *{box-sizing:border-box;margin:0;padding:0;border:0;font:inherit;color:inherit;background:none;letter-spacing:normal;text-transform:none;text-decoration:none}
+#gbx button{cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+#gbx input,#gbx textarea{outline:0;width:100%}
+#gbx svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#gbx svg.f{fill:currentColor;stroke:none}
+#gbx b{font-weight:600}
+#gbx .w{position:relative;height:720px;border:1px solid var(--l);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 30px 60px -24px rgba(16,24,40,.28);display:flex;flex-direction:column}
+#gbx .br{height:40px;flex:none;display:flex;align-items:center;gap:14px;padding:0 14px;background:#f6f7f9;border-bottom:1px solid var(--l)}
+#gbx .dt{display:flex;gap:6px}#gbx .dt i{width:11px;height:11px;border-radius:50%;background:#ff5f57}#gbx .dt i+i{background:#febc2e}#gbx .dt i+i+i{background:#28c840}
+#gbx .url{flex:1;max-width:460px;margin:0 0 0 auto;background:#fff;border:1px solid var(--l);border-radius:8px;padding:3px 12px;font-size:12px;color:var(--m);white-space:nowrap;overflow:hidden}
+#gbx .tbx{margin-left:auto;display:flex;gap:6px;flex:none}#gbx .tr{font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;border:1px solid var(--l);background:#fff;white-space:nowrap}#gbx .tr.on{background:#e8f7ee;border-color:#4cc77c;color:#00692b}#gbx .tr svg{width:14px;height:14px}
+#gbx .ap{flex:1;display:flex;min-height:0}
+#gbx .ml{flex:1;min-width:0;display:flex;flex-direction:column;background:#f6f8fc}
+#gbx .mt{height:60px;flex:none;display:flex;align-items:center;gap:14px;padding:0 16px}
+#gbx .mlg{display:flex;align-items:center;gap:8px;font-size:19px;color:#3c4043;width:176px}#gbx .mlg svg{width:24px;height:24px;color:#ea4335}
+#gbx .ms{flex:1;max-width:620px;height:42px;border-radius:24px;background:#e9eef6;display:flex;align-items:center;gap:10px;padding:0 16px;color:#5f6368}
+#gbx .mb{flex:1;display:flex;min-height:0}
+#gbx .nv{width:208px;flex:none;padding:0 8px 0 4px;overflow:auto}
+#gbx .cmpz{margin:2px 0 14px 4px;padding:16px 22px;border-radius:16px;background:#c2e7ff;font-weight:600}
+#gbx .ni{display:flex;width:100%;align-items:center;gap:16px;height:32px;padding:0 12px 0 20px;border-radius:0 16px 16px 0;font-size:13.5px;color:#202124}
+#gbx .ni span{margin-left:auto;font-size:12px}#gbx .ni.on{background:#d3e3fd;font-weight:600}
+#gbx .ls{flex:1;min-width:0;background:#fff;border-radius:16px 16px 0 0;margin-right:8px;overflow:auto}
+#gbx .lh{display:flex;gap:16px;padding:10px 16px;color:#5f6368;border-bottom:1px solid #f1f3f4}
+#gbx .r{display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;border-bottom:1px solid #f1f3f4;font-size:13.5px;cursor:pointer;background:#f2f6fc;color:#3c4043}
+#gbx .r.u{background:#fff;font-weight:600;color:#202124}#gbx .r:hover{box-shadow:inset 1px 0 #dadce0,inset -1px 0 #dadce0,0 1px 3px rgba(60,64,67,.25);position:relative;z-index:1}
+#gbx .r .sd{width:180px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gbx .r .sb{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#gbx .r .sb i{font-style:normal;font-weight:400;color:#5f6368}
+#gbx .r .tm{font-size:12px;flex:none}#gbx .sr svg{color:#c4c7c5}#gbx .sr.on svg{color:#f5b400;fill:#f5b400}
+#gbx .dl{font-size:11px;font-weight:600;padding:0 6px;border-radius:4px;background:#e7f6ec;color:#067647;flex:none}
+#gbx .rd{padding:18px 28px 40px}#gbx .rd h2{font-size:21px;margin:8px 0 18px;font-weight:500}
+#gbx .fr{display:flex;align-items:center;gap:12px}#gbx .fr small{color:var(--m);font-size:12px}
+#gbx .av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;font-size:13px;background:#7a8b99;flex:none}
+#gbx .bdy p{margin:14px 0;line-height:1.6;max-width:680px}
+#gbx .rb{display:flex;gap:10px;margin-top:18px}#gbx .rb button{border:1px solid #747775;border-radius:999px;padding:7px 18px;font-weight:500}
+#gbx .rpl{margin-top:18px;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.2),0 4px 8px rgba(0,0,0,.08);padding:14px;max-width:720px}
+#gbx .rpl textarea{min-height:150px;resize:vertical;line-height:1.55;font-size:13.5px}
+#gbx .rpl .bt{margin-top:8px;border-radius:999px;padding:8px 20px}
+#gbx .px{width:380px;flex:none;display:flex;flex-direction:column;border-left:1px solid var(--l);background:#fff;position:relative;min-height:0}
+#gbx .px.hid{display:none}
+#gbx .hd{height:56px;flex:none;display:flex;align-items:center;gap:8px;padding:0 14px;font-size:17px;font-weight:700}
+#gbx svg.lgo{width:24px;height:24px;fill:#4cc77c;stroke:none}
+#gbx .me{margin-left:auto;width:32px;height:32px;font-size:15px;background:#4b3a33}
+#gbx .cx{width:32px;height:32px;border-radius:50%;background:var(--s);justify-content:center;color:#555}
+#gbx .tb{margin:0 12px 8px;background:var(--s);border-radius:10px;padding:3px;display:flex;flex:none}
+#gbx .tb button{flex:1;justify-content:center;height:32px;border-radius:8px;color:#374151}
+#gbx .tb .on{background:#fff;color:var(--b);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+#gbx .bd{flex:1;overflow:auto;padding:4px 12px 14px;display:flex;flex-direction:column;gap:10px;min-height:0;scroll-behavior:smooth}
+#gbx .cd,#gbx .ac{border:1px solid var(--l);border-radius:12px;background:#fff;flex:none}
+#gbx .ch,#gbx .ah{display:flex;align-items:center;gap:8px;padding:13px 14px;cursor:pointer;font-weight:600;width:100%}
+#gbx .ch>svg:last-child,#gbx .ah>svg:last-child{margin-left:auto;color:var(--m)}
+#gbx .cb,#gbx .ab{padding:0 14px 14px}
+#gbx .rg{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500}
+#gbx .rg+svg{margin-left:6px!important}
+#gbx .mu{color:var(--m);font-size:12.5px}
+#gbx .sx{display:flex;align-items:center;gap:8px;border:1px solid var(--l);border-radius:8px;padding:6px 10px;color:var(--m);margin-bottom:8px;font-size:13px}
+#gbx .li{display:flex;align-items:center;gap:10px;padding:8px 6px;border-radius:8px;cursor:pointer;width:100%}
+#gbx .li:hover{background:var(--s)}#gbx .li .tt{flex:1;min-width:0}
+#gbx .li .tt>div:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gbx .bl{color:var(--b)}
+#gbx .sq{width:28px;height:28px;border-radius:6px;display:grid;place-items:center;background:#111;color:#fff;font-size:11px;font-weight:700;flex:none}
+#gbx .sm{border:1px solid var(--l);border-radius:6px;padding:3px 10px;font-size:12px}
+#gbx .dh{margin:-4px -12px 0;padding:12px;background:#eaf7ef;position:relative}
+#gbx .drw{display:flex;gap:8px}
+#gbx .sel{flex:1;height:42px;background:#fff;border:1px solid var(--l);border-radius:8px;padding:0 10px;justify-content:space-between;min-width:0}
+#gbx .sel b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+#gbx .ib{width:42px;height:42px;justify-content:center;background:#fff;border:1px solid var(--l);border-radius:8px;flex:none}
+#gbx .ib.on{color:#d97706}#gbx .ib.cl{color:#00a1e0}
+#gbx .chp{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+#gbx .pl{display:inline-flex;align-items:center;font-size:12px;font-weight:500;padding:2px 8px;border-radius:6px;background:#fff;white-space:nowrap}
+#gbx .pl.g{background:var(--s);color:#4b5563}#gbx .pl.bb{background:var(--bl);color:var(--b)}
+#gbx .pl.hi{background:#fde8e8;color:#b42318}#gbx .pl.md{background:#fef3c7;color:#92400e}#gbx .pl.lo{background:#e7f6ec;color:#067647}
+#gbx .ds{padding:14px}#gbx .dst{display:flex;gap:18px;margin-top:12px;padding-top:12px;border-top:1px solid var(--l);color:var(--m);font-size:12.5px;align-items:center}
+#gbx .dst span{display:flex;gap:5px;align-items:center}
+#gbx .gn{display:flex;align-items:center;gap:8px;color:var(--p);font-size:13px;padding:2px 0 4px}
+#gbx .gn svg{animation:gbp 1s ease-in-out infinite}
+@keyframes gbp{50%{opacity:.35;transform:scale(.8)}}
+#gbx .gb{font-weight:500;font-size:13px;border:1px solid var(--l);border-radius:8px;padding:5px 10px;margin-left:auto}
+#gbx .gb+svg{margin-left:6px!important}
+#gbx .srw{display:flex;align-items:center;gap:8px;padding:11px 2px;border-top:1px solid #f0f1f3;cursor:pointer;font-weight:500}
+#gbx .srw .in{margin-left:auto;color:#9ca3af}
+#gbx .md{font-size:13.5px;line-height:1.55}#gbx .md h3{font-size:17px;font-weight:700;margin:12px 0 6px;padding-top:10px;border-top:2px solid #e5e7eb}
+#gbx .md h4{font-size:15px;font-weight:600;margin:12px 0 4px}#gbx .md p{margin:6px 0}#gbx .md ul{padding-left:18px;margin:6px 0}#gbx .md li{margin:3px 0;list-style:disc}
+#gbx .md a{color:var(--b)}#gbx .md table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+#gbx .md td,#gbx .md th{border:1px solid var(--l);padding:6px 8px;vertical-align:top}#gbx .md th{background:var(--s);font-weight:600}
+#gbx .lb{font-size:11.5px;font-weight:600;color:var(--m);margin:6px 0}
+#gbx .mtg{padding:10px 0;border-bottom:1px solid #f0f1f3}#gbx .mtg:last-child{border:0}
+#gbx .mr{display:flex;gap:10px;margin-top:6px}
+#gbx .th{width:62px;height:40px;border-radius:6px;background:#1f2937;color:#fff;position:relative;display:grid;place-items:center;flex:none}
+#gbx .th span{position:absolute;bottom:2px;left:3px;font-size:10px;background:rgba(0,0,0,.6);padding:0 3px;border-radius:3px}
+#gbx .mav{display:flex;align-items:center;gap:6px;margin-top:3px;color:var(--m);font-size:12.5px}
+#gbx .mav i{width:18px;height:18px;border-radius:50%;background:#6b8e8a;color:#fff;font-size:9px;font-style:normal;display:grid;place-items:center;margin-right:-10px;border:1.5px solid #fff}
+#gbx .mav i+i{background:#3f6f5f}#gbx .mav i:last-of-type{margin-right:2px}
+#gbx .cl3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#gbx .mss{font-size:13px;margin-top:8px}
+#gbx .lk{color:var(--b);font-weight:500;font-size:13px}
+#gbx .aib{display:flex;align-items:center;gap:8px;margin-top:8px;background:var(--s);border-radius:6px;padding:5px 8px;font-size:12.5px;cursor:pointer}
+#gbx .aib svg{margin-left:auto}
+#gbx .ck{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;font-size:13px}
+#gbx .ck i{width:16px;height:16px;border:1.5px solid #c4c9d0;border-radius:4px;flex:none;margin-top:2px;display:grid;place-items:center;color:#fff}
+#gbx .ck.on i{background:var(--b);border-color:var(--b)}#gbx .ck.on span{text-decoration:line-through;color:var(--m)}
+#gbx .sng{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;font-size:13px}
+#gbx .sng.g{grid-template-columns:1fr 1fr}#gbx .sng.g>div{background:var(--s);border-radius:8px;padding:8px}
+#gbx .sng .k{color:#4b5563}
+#gbx .vt{display:flex;gap:2px;margin-left:auto}#gbx .vt button{width:28px;height:28px;justify-content:center;border-radius:6px;color:var(--m)}#gbx .vt .on{background:var(--bl);color:var(--b)}
+#gbx .vt+svg{margin-left:6px!important}
+#gbx .rcr{display:flex;align-items:center;gap:8px;padding:11px 6px;border-bottom:1px solid #f0f1f3;cursor:pointer;border-radius:6px}
+#gbx .rcr.on{background:var(--s)}#gbx .cnt{color:var(--b)}
+#gbx .rci{padding:8px 4px 8px 26px}
+#gbx .it{display:flex;align-items:center;gap:8px;padding:6px 0}#gbx .it .tt{flex:1;min-width:0}
+#gbx .ico{width:28px;height:28px;border-radius:6px;display:grid;place-items:center;background:#e7f6ec;color:#16a34a;flex:none}
+#gbx .stz{display:flex;gap:1px}#gbx .stz svg{width:13px;height:13px;color:#f5b400}#gbx .stz svg.o{color:#d1d5db}
+#gbx .cib{display:flex;justify-content:space-between;align-items:center;width:100%;border:1px solid var(--l);border-radius:8px;padding:8px 12px;margin:4px 0 6px;font-size:13px}
+#gbx .ok{width:18px;height:18px;border-radius:50%;background:#22c55e;color:#fff;font-size:11px;display:grid;place-items:center}
+#gbx .pp{display:flex;align-items:center;gap:10px;padding:8px 0}#gbx .pp .av{width:34px;height:34px;background:#a3a3a3}
+#gbx .pp .mu{display:flex;gap:6px;align-items:center}#gbx .pp .ad{color:#16a34a}
+#gbx .ppm{margin-left:auto;display:flex;gap:12px;color:var(--m);font-size:12.5px}#gbx .ppm span{display:flex;gap:4px;align-items:center}
+#gbx .tre{padding:6px 0 6px 12px;border-left:2px solid #e5e7eb}
+#gbx .cwr{flex:none;padding:8px 12px 4px;position:relative}
+#gbx .cmp{border:1.5px solid var(--b);border-radius:12px;padding:9px 12px 8px}
+#gbx .cmp textarea{resize:none;height:38px;font-size:13.5px;line-height:1.4;display:block}
+#gbx .mn{color:var(--b);font-size:13.5px}
+#gbx .crw{display:flex;align-items:center;gap:4px;margin-top:2px}
+#gbx .ic{width:30px;height:30px;justify-content:center;border-radius:8px;color:#4b5563}#gbx .ic:hover{background:var(--s)}
+#gbx .pb{height:30px;padding:0 11px;border:1px solid #d6d9de;border-radius:999px;font-size:13px;color:#374151}
+#gbx .snd{width:32px;height:32px;justify-content:center;border-radius:8px;background:var(--b);color:#fff}
+#gbx .nt{text-align:center;font-size:11px;color:#9ca3af;padding:2px 0 8px;flex:none}
+#gbx .pop{position:absolute;bottom:calc(100% - 2px);left:12px;background:#fff;border:1px solid var(--l);border-radius:12px;box-shadow:0 12px 32px rgba(16,24,40,.16);padding:6px;min-width:230px;z-index:20;max-height:330px;overflow:auto}
+#gbx .pop.s2{bottom:calc(100% + 248px);max-height:250px}#gbx .pop.rt{left:auto;right:12px;min-width:170px}
+#gbx .pop button{display:flex;width:100%;gap:10px;padding:8px 10px;border-radius:8px;font-size:13.5px;text-align:left}
+#gbx .pop button:hover,#gbx .pop .on{background:var(--s)}#gbx .pop .on{color:var(--p)}
+#gbx .pop .sp{height:1px;background:var(--l);margin:4px 6px}
+#gbx .ag{margin-left:auto;font-size:11px;background:#f1e8ff;color:#7c3aed;border-radius:6px;padding:1px 6px;white-space:nowrap}
+#gbx .pop .ar{margin-left:auto;color:var(--m)}
+#gbx [data-tip]{position:relative}
+#gbx [data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#111;color:#fff;font-size:12px;font-weight:400;padding:6px 10px;border-radius:6px;white-space:nowrap;z-index:30;pointer-events:none}
+#gbx .ts{position:absolute;bottom:150px;left:auto;right:30px;transform:translateY(8px);background:#1f2937;color:#fff;font-size:12.5px;padding:8px 12px;border-radius:8px;opacity:0;transition:.25s;pointer-events:none;z-index:40;max-width:90%;text-align:center}
+#gbx .ts.on{opacity:1;transform:none}
+#gbx .cht{display:flex;align-items:center;gap:6px;font-weight:600;border-bottom:1px solid var(--l);margin:-4px -12px 0;padding:4px 12px 8px;position:sticky;top:-4px;background:#fff;z-index:3}
+#gbx .cht span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gbx .um{align-self:flex-end;background:var(--bl);padding:8px 12px;border-radius:12px 12px 4px 12px;max-width:85%;font-size:13.5px}
+#gbx .am{display:flex;gap:8px;align-items:flex-start}#gbx .am>.lgo{margin-top:2px;width:22px;height:22px}#gbx .am>div{flex:1;min-width:0}
+#gbx .stp{font-size:12.5px;color:var(--m);display:flex;gap:6px;align-items:center;padding:2px 0}#gbx .stp svg{width:13px;height:13px;color:#16a34a}
+#gbx .stp.ld svg{color:var(--p);animation:gbp 1s infinite}
+#gbx .fi{animation:gbf .35s ease both}@keyframes gbf{from{opacity:0;transform:translateY(4px)}}
+#gbx .em{border:1px solid var(--l);border-radius:10px;padding:12px;background:#fafbfc;margin:8px 0;font-size:13px}
+#gbx .em .es{font-size:12.5px;color:var(--m);padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--l)}
+#gbx .em .es b{color:var(--t)}
+#gbx .bt{background:var(--b);color:#fff!important;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:500}
+#gbx .bt2{border:1px solid var(--l);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:500}
+#gbx .acr{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+#gbx .sgc{border:1px solid #d6d9de;border-radius:999px;padding:5px 11px;font-size:12.5px;background:#fff}
+#gbx .why{background:#f5f3ff;border-radius:8px;padding:8px 10px;font-size:13px}
+#gbx .ce{display:flex;gap:10px;align-items:center;border:1px solid var(--l);border-radius:10px;padding:10px;margin:6px 0}
+#gbx .ft{width:22px;height:22px;border-radius:5px;display:grid;place-items:center;flex:none;color:#fff;font-size:9px;font-weight:700}
+#gbx .ft.pdf{background:#e2453c}#gbx .ft.vid{background:#4a7cf6}#gbx .ft.pg{background:#2fb565}#gbx .ft.doc{background:#7a8594}
+#gbx .cfl{padding:10px 8px;border-bottom:1px solid #f0f1f3;font-size:13.5px}#gbx .cfl .mu{margin-left:auto;display:flex;gap:4px;align-items:center;white-space:nowrap}
+#gbx .csd{position:absolute;left:0;right:0;top:100%;margin-top:6px;background:#fff;border:1px solid var(--l);border-radius:12px;box-shadow:0 16px 40px rgba(16,24,40,.18);z-index:15;max-height:440px;overflow:auto}
+#gbx .chs{display:flex;flex-wrap:wrap;gap:6px;padding:10px;border-bottom:1px solid var(--l)}
+#gbx .chs span{border:1px solid #d6d9de;border-radius:6px;padding:2px 8px;font-size:12px}
+#gbx .bc{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--m);padding:12px 12px 4px}#gbx .bc button{color:var(--t);font-weight:500}
+#gbx .fq{background:var(--s);border-radius:10px;padding:10px;margin-top:8px;font-size:13px}
+#gbx .fq .ad2{float:right;color:var(--b);border:1px solid var(--b);border-radius:6px;padding:1px 8px;font-size:12px;margin-top:6px}
+#gbx .emp{text-align:center;padding:28px 10px;color:var(--m);font-size:13px}#gbx .emp svg{width:34px;height:34px;margin:0 auto 8px;display:block;color:#c0c6ce}
+#gbx .rl{width:52px;flex:none;border-left:1px solid var(--l);display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:14px;background:#f6f8fc}
+#gbx .rl button{width:38px;height:38px;justify-content:center;border-radius:50%;color:#5f6368}#gbx .rl .on{background:#e1ebff}
+#gbx .fc{position:absolute;left:60%;top:60%;width:22px;height:22px;z-index:60;pointer-events:none;opacity:0;transition:left .75s cubic-bezier(.45,0,.2,1),top .75s cubic-bezier(.45,0,.2,1),opacity .3s,transform .15s}
+#gbx .fc svg{width:22px;height:22px;fill:#111;stroke:#fff;stroke-width:1.5;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+#gbx .fc.k{transform:scale(.82)}
+#gbx .fc::before{content:"";position:absolute;left:-12px;top:-12px;width:24px;height:24px;border-radius:50%;background:rgba(52,120,246,.35);transform:scale(0);opacity:0}
+#gbx .fc.k::before{animation:gbr .5s ease-out}@keyframes gbr{0%{transform:scale(0);opacity:1}100%{transform:scale(2.2);opacity:0}}
+#gbx .as{width:68px;flex:none;background:#f6f8fc;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:14px}
+#gbx .as button{flex-direction:column;gap:3px;font-size:11px;font-weight:500;color:#444746}
+#gbx .as span{width:52px;height:30px;border-radius:15px;display:grid;place-items:center}#gbx .as svg{width:19px;height:19px}
+#gbx .as .on span{background:#d3e3fd}#gbx .as button:hover span{background:#e8ecf3}#gbx .as .on:hover span{background:#d3e3fd}
+#gbx .ct{height:60px;flex:none;display:flex;align-items:center;gap:8px;padding:0 16px 0 4px;color:#3c4043}#gbx .ct>svg{margin-right:6px}
+#gbx .clg{display:flex;align-items:center;gap:8px;font-size:19px;width:150px}#gbx .clg svg{width:24px;height:24px;color:#1a73e8}
+#gbx .tdy,#gbx .wkp{border:1px solid #747775;border-radius:999px;padding:6px 16px;font-weight:500}#gbx .ct h3{font-size:20px;font-weight:400;margin-left:4px;white-space:nowrap}
+#gbx .wkp{margin-left:auto;display:flex;gap:6px;align-items:center;padding:6px 12px 6px 16px}
+#gbx .cbx{flex:1;display:flex;min-height:0}
+#gbx .cs{width:226px;flex:none;padding:0 14px 0 4px;overflow:auto}
+#gbx .crt{box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px rgba(60,64,67,.15);border-radius:16px;padding:16px 22px 16px 16px;font-weight:500;background:#fff;margin:0 0 20px;gap:10px}#gbx .crt svg{width:22px;height:22px}
+#gbx .mlb{font-size:13px;font-weight:500;padding:0 4px 6px}
+#gbx .mm{display:grid;grid-template-columns:repeat(7,1fr);font-size:10.5px;text-align:center}#gbx .mm b{font-weight:500;color:#70757a;padding:3px 0}
+#gbx .mm button{height:26px;justify-content:center;font-size:10.5px;border-radius:50%}#gbx .mm button:hover{background:#f1f3f4}
+#gbx .mm .x{color:#9aa0a6}#gbx .mm .sw{background:#e8f0fe;border-radius:0;color:#1967d2}#gbx .mm .td{background:#1a73e8!important;color:#fff;border-radius:50%}
+#gbx .mc{margin-top:20px;font-size:13px}#gbx .mc>div:not(.mlb){display:flex;gap:12px;align-items:center;padding:5px 4px}
+#gbx .mc i{width:16px;height:16px;border-radius:3px;display:grid;place-items:center;color:#fff}#gbx .mc i svg{width:12px;height:12px;stroke-width:3}
+#gbx .cgw{flex:1;min-width:0;background:#fff;border-radius:16px 16px 0 0;margin-right:8px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+#gbx .chd,#gbx .cad,#gbx .cgr{display:grid;grid-template-columns:52px repeat(7,minmax(0,1fr))}
+#gbx .chd{padding-top:10px}#gbx .chd>div{text-align:center;font-size:11px;font-weight:500;color:#70757a}
+#gbx .chd b{display:grid;place-items:center;width:42px;height:42px;margin:2px auto 4px;border-radius:50%;font-size:24px;font-weight:400;color:#3c4043}
+#gbx .chd .tdc{color:#1a73e8}#gbx .chd .tdc b{background:#1a73e8;color:#fff}
+#gbx .cad{border-bottom:1px solid #dadce0;min-height:26px}#gbx .cad>div{border-left:1px solid #e8eaed;padding:2px 4px 2px 2px;min-width:0}
+#gbx .cad span{display:block;background:#0b8043;color:#fff;border-radius:4px;font-size:12px;padding:2px 6px;white-space:nowrap;overflow:hidden;cursor:pointer}
+#gbx .cad .gl{font-size:10px;color:#70757a;border:0;text-align:right;padding:6px 8px 0 0}
+#gbx .csc{flex:1;overflow:auto;min-height:0}#gbx .cgr{padding-top:8px}
+#gbx .hc{height:44px;font-size:10px;color:#70757a;text-align:right;padding-right:8px;transform:translateY(-7px)}#gbx .hc:first-child{visibility:hidden}
+#gbx .dc{position:relative;height:484px;border-left:1px solid #e8eaed;background:repeating-linear-gradient(#e8eaed 0 1px,#fff 1px 44px)}
+#gbx .ev{position:absolute;left:1px;right:6px;border-radius:6px;color:#fff;font-size:11.5px;line-height:1.3;padding:3px 6px;overflow:hidden;text-align:left;display:block;border:1px solid #fff;z-index:1}
+#gbx .ev b{font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#gbx .ev.ps{opacity:.62}
+#gbx .ev:hover,#gbx .ev.sel{box-shadow:0 4px 12px rgba(0,0,0,.28);z-index:2}
+#gbx .nl{position:absolute;left:0;right:0;height:2px;background:#ea4335;z-index:3}#gbx .nl::before{content:"";position:absolute;left:-6px;top:-5px;width:12px;height:12px;border-radius:50%;background:#ea4335}
+#gbx .ep{position:absolute;z-index:25;width:350px;max-width:calc(100% - 16px);max-height:calc(100% - 16px);overflow:auto;background:#fff;border-radius:16px;box-shadow:0 24px 38px 3px rgba(60,64,67,.14),0 9px 46px 8px rgba(60,64,67,.12),0 11px 15px -7px rgba(60,64,67,.2);color:#3c4043}#gbx .ep.an{animation:gbf .2s ease both}
+#gbx .epa{display:flex;justify-content:flex-end;gap:2px;padding:8px 8px 0}
+#gbx .epr{display:flex;gap:16px;padding:7px 18px 7px 20px;align-items:flex-start}
+#gbx .epr>svg,#gbx .eic svg{width:20px;height:20px;margin-top:2px;color:#5f6368;flex:none}#gbx .eic{flex:none;display:flex}
+#gbx .epr .sw{width:14px;height:14px;border-radius:4px;margin:7px 3px 0 3px;flex:none}
+#gbx .ep h4{font-size:20px;font-weight:400;color:#1f1f1f;line-height:1.3}
+#gbx .mpb{background:linear-gradient(90deg,#4cc77c,#b5e6c6);color:#fff;font-weight:600;padding:8px 18px;border-radius:6px;font-size:14px}#gbx .mpb:hover{filter:brightness(.96)}
+#gbx .jv{background:#1a73e8;color:#fff;font-weight:500;border-radius:999px;padding:9px 18px}
+#gbx .gu{display:flex;align-items:center;gap:10px;margin-top:9px}#gbx .gu .av{width:28px;height:28px;font-size:11px}#gbx .gu .tt{flex:1;min-width:0;line-height:1.3}
+#gbx .adc{background:#4cc77c;color:#fff;font-size:12px;padding:3px 8px;border-radius:4px;flex:none}
+#gbx .epf{display:flex;align-items:center;gap:8px;padding:10px 16px;margin-top:8px;border-top:1px solid #e8eaed;background:#f8fafd}#gbx .epf span{margin-right:auto}
+#gbx .epf button{border:1px solid #747775;border-radius:999px;padding:5px 14px;font-weight:500}#gbx .epf .on{background:#c2e7ff;border-color:#c2e7ff;color:#001d35}
+#gbx .mch{display:flex;align-items:center;gap:8px;border:1px solid var(--l);border-radius:8px;padding:6px 8px 6px 10px;font-weight:600;align-self:flex-start;max-width:100%;flex:none}
+#gbx .mch span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#gbx .mch button{color:var(--m)}
+#gbx .rpc{display:flex;gap:12px;align-items:center;padding:14px}#gbx .rbi{width:40px;height:40px;border-radius:10px;background:var(--bl);color:var(--b);display:grid;place-items:center;flex:none}#gbx .rbi svg{width:20px;height:20px}
+#gbx .rpc .bt,#gbx .ab>.bt{display:inline-flex;flex:none}
+#gbx .gt{position:absolute;z-index:70;width:272px;background:#fff;border:1px solid #cfe9d9;border-radius:12px;box-shadow:0 18px 44px rgba(0,48,19,.22);padding:12px 14px;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s;pointer-events:none;left:-999px}
+#gbx .gt.on{opacity:1;transform:none;pointer-events:auto}
+#gbx .gt::before{content:"";position:absolute;width:10px;height:10px;background:#fff;border:1px solid #cfe9d9;border-right:0;border-bottom:0;transform:rotate(45deg);left:var(--ax,24px);top:-6px}
+#gbx .gt.up::before{top:auto;bottom:-6px;border:1px solid #cfe9d9;border-left:0;border-top:0}#gbx .gt.nx::before{display:none}
+#gbx .gs{font-size:11px;font-weight:600;color:#00692b;background:#e8f7ee;border-radius:999px;padding:2px 8px;display:inline-block}
+#gbx .gt h5{font-size:14.5px;font-weight:600;margin:8px 0 3px;color:#003013}#gbx .gt p{font-size:12.5px;color:#4b5563;line-height:1.45}
+#gbx .gf{display:flex;align-items:center;gap:10px;margin-top:11px}#gbx .gbar{flex:1;height:3px;background:#e5e7eb;border-radius:3px;overflow:hidden}#gbx .gbar i{display:block;height:100%;width:0;background:#4cc77c}
+#gbx .gk{font-size:12px;color:#6b7280}#gbx .gn2{background:#00692b;color:#fff;border-radius:8px;padding:5px 12px;font-size:12.5px;font-weight:500}
+#gbx .hlt{outline:2.5px solid #4cc77c!important;outline-offset:2px;border-radius:8px}
+#gbx .po .cs{display:none}
+#gbx .ml{position:relative}#gbx .cmw{position:absolute;right:18px;bottom:0;width:min(540px,calc(100% - 36px));z-index:12}
+#gbx .cmx{background:#fff;border-radius:12px 12px 0 0;box-shadow:0 8px 30px rgba(0,0,0,.22);display:flex;flex-direction:column}
+#gbx .cmh{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 4px 14px;background:#f2f6fc;border-radius:12px 12px 0 0;font-weight:500;font-size:13.5px}
+#gbx .cmf{display:flex;gap:8px;align-items:center;border-bottom:1px solid #f1f3f4;padding:8px 14px;font-size:13.5px}
+#gbx .gbb{display:flex;align-items:center;gap:7px;padding:7px 12px;border-bottom:1px solid #f1f3f4;position:relative;flex-wrap:wrap}#gbx .gbb .eic svg{width:20px;height:20px}
+#gbx .dch{border:1px solid var(--l);border-radius:6px;padding:4px 8px;font-size:12.5px;max-width:190px}#gbx .dch b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}
+#gbx .mpb.sm2{padding:5px 12px;font-size:12.5px}#gbx .ctb{font-size:12.5px;border:1px solid var(--l);border-radius:6px;padding:4px 8px}
+#gbx .cnb{margin-left:auto;background:#4cc77c;color:#fff;border-radius:6px;padding:5px 10px;font-size:12.5px;font-weight:600}
+#gbx .cmb{height:170px;resize:none;padding:10px 14px;font-size:13.5px;line-height:1.55}
+#gbx .lks{display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 8px}#gbx .lkc{display:inline-flex;align-items:center;gap:6px;background:var(--bl);color:var(--b);border-radius:6px;padding:3px 8px;font-size:12.5px}#gbx .lkc i{font-style:normal;color:var(--m);font-size:11px}#gbx .lkc svg{width:13px;height:13px}
+#gbx .cft{display:flex;align-items:center;gap:12px;padding:8px 14px 12px}#gbx .sndb{border-radius:999px;padding:8px 22px}
+#gbx .cpp{position:absolute;top:100%;left:12px;right:12px;background:#fff;border:1px solid var(--l);border-radius:10px;box-shadow:0 12px 32px rgba(16,24,40,.16);padding:8px;z-index:5;max-height:250px;overflow:auto}
+#gbx .cpp>button,#gbx #ctl button{display:flex;width:100%;padding:7px 8px;border-radius:6px;gap:8px;text-align:left;font-size:13px}#gbx .cpp>button:hover,#gbx #ctl button:hover{background:var(--s)}#gbx .cpp>.on{color:var(--b);font-weight:600}#gbx .cpp .lb{margin:6px 4px}
+#gbx .fch{display:flex;flex-wrap:wrap;gap:6px;flex:none}#gbx .fch button{border:1px solid #d6d9de;border-radius:999px;padding:3px 10px;font-size:12px}#gbx .fch .on{background:var(--bl);border-color:var(--b);color:var(--b)}
+#gbx .rci2{border:1px solid var(--l);border-radius:10px;padding:10px;flex:none}#gbx .rch{display:flex;align-items:center;gap:8px}#gbx .rch .ic{margin-left:auto;width:26px;height:26px}
+#gbx .rcn{display:flex;align-items:center;gap:8px;margin-top:6px;font-weight:500}#gbx .rcn span:nth-child(2){flex:1}
+#gbx .ad2b{color:var(--b);border:1px solid var(--b);border-radius:6px;padding:1px 8px;font-size:12px;flex:none}#gbx .rci .it .ic{width:26px;height:26px}
+#gbx .rsn{background:#f5f3ff;border-radius:8px;padding:8px 10px;font-size:12.5px;margin:6px 0}#gbx .rsn ul{padding-left:16px;margin-top:4px}#gbx .rsn li{list-style:disc}
+#gbx .cig{display:grid;grid-template-columns:96px 1fr;gap:5px 10px;font-size:12.5px;padding:6px 2px 8px}
+#gbx .cib{cursor:pointer}#gbx .pdr{display:flex;align-items:center;gap:8px;flex:none}#gbx .sb2{border:1px solid var(--l);border-radius:8px;padding:6px 10px;font-weight:500;min-width:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gbx .ctc{border:1px solid var(--l);border-radius:10px;padding:8px 12px;flex:none}
+#gbx .src{font-size:12px;color:var(--m);margin-top:8px;border-top:1px solid var(--l);padding-top:6px}#gbx .src b{color:var(--t);margin-right:6px}
+#gbx .nl2{font-size:12px;font-weight:600;color:#00692b;margin-bottom:2px}
+#gbx .dpg{display:flex;gap:4px;margin:4px 0 8px}#gbx .dpg span{flex:1;height:6px;border-radius:3px;background:#e5e7eb}#gbx .dpg .on{background:#4cc77c}
+#gbx .avt{display:flex;gap:10px;padding:6px 0;font-size:13px}#gbx .avt i{width:8px;height:8px;border-radius:50%;background:#4cc77c;margin-top:6px;flex:none}
+#gbx .gt.lt::before{left:auto;right:-6px;top:var(--ay,18px);border:1px solid #cfe9d9;border-left:0;border-bottom:0}
+#gbx .emb{display:flex;align-items:center;gap:12px;margin:-6px 0 18px}#gbx .emb .eic svg{width:22px;height:22px}
+#gbx .tck{display:flex;gap:18px;margin:2px 2px 6px}#gbx .tck button{gap:8px;font-size:13px}
+#gbx .tck i{width:17px;height:17px;border-radius:4px;border:1.5px solid #c4c9d0;display:grid;place-items:center;color:#fff}#gbx .tck i.on{background:var(--b);border-color:var(--b)}#gbx .tck i svg{width:12px;height:12px;stroke-width:3}
+#gbx .tr2{width:100%;padding:10px 4px;font-weight:500;text-align:left;gap:6px}#gbx .tr2 svg{color:var(--m)}#gbx .tr2:hover{color:var(--b)}
+#gbx .tpb{background:var(--s);border-radius:10px;padding:10px 12px;font-size:12.5px;margin:0 0 6px}#gbx .tpb p{white-space:pre-line;margin-top:8px;line-height:1.5}#gbx .tpb.fi>b{display:block}#gbx .tpb.fi>b+p+b{margin-top:6px}
+@container (max-width:1020px){#gbx .nv,#gbx .mlg,#gbx .cs,#gbx .clg span,#gbx .wkp{display:none}#gbx .r .sd{width:130px}#gbx .clg{width:auto}}
+@container (max-width:720px){#gbx .po .ml,#gbx .po .as{display:none}#gbx .px{width:auto;flex:1}#gbx .w{height:680px}#gbx .url,#gbx .rl{display:none}#gbx .tr{padding:4px 8px;font-size:11px}#gbx .as{width:56px}#gbx .ct h3{font-size:16px}#gbx .tdy{display:none}#gbx .gt{width:240px}}
+@media (prefers-reduced-motion:reduce){#gbx *{animation:none!important;transition:none!important}}
+</style>
+<script>
+window.GBXD=(()=>{
+const P={x:'M18 6 6 18M6 6l12 12',chev:'m9 18 6-6-6-6',down:'m6 9 6 6 6-6',left:'m15 18-6-6 6-6',plus:'M12 5v14M5 12h14',hist:'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5M12 7v5l3 2',send:'M5 12h14M12 5l7 7-7 7',lines:'M4 6h16M4 12h10M4 18h13',globe:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20',cal:'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',mon:'M3 4h18v12H3zM8 20h8M12 16v4',share:'M18 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM8.6 13.5l6.8 4M15.4 6.5l-6.8 4',cap:'M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 2 9 2 12 0v-5',srch:'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM21 21l-4.3-4.3',spark:'M12 2l2.2 6.3L20.5 10.5l-6.3 2.2L12 19l-2.2-6.3L3.5 10.5l6.3-2.2zM19 15l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z',star:'M12 2l3 6.3 7 1-5 4.8 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.8 7-1z',info:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 16v-4M12 8h.01',mail:'M3 5h18v14H3zM3 6l9 7 9-7',copy:'M9 9h11v11H9zM5 15H4V4h11v1',ext:'M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6',eye:'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8',file:'M14 2H6v20h12V6zM14 2v4h4',fold:'M3 6h6l2 2h10v11H3z',crown:'M3 8l4 4 5-7 5 7 4-4-2 11H5z',cloud:'M7 19a5 5 0 0 1-.6-10A6.5 6.5 0 0 1 18.5 9 4.5 4.5 0 0 1 18 19z',bolt:'M13 2 4 14h7l-1 8 9-12h-7z',plug:'M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4',play:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM10 8l6 4-6 4z',clip:'M21 11l-9 9a5 5 0 0 1-7-7l9-9a3.5 3.5 0 0 1 5 5l-9 9a2 2 0 0 1-3-3l8-8',sld:'M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1M15 4v4M9 10v4M17 16v4',grid:'M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z',uadd:'M15 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM19 8v6M22 11h-6',inbox:'M22 12h-6l-2 3h-4l-2-3H2M5 5h14l3 7v7H2v-7z',clk:'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 7v5l3 2',sndm:'M22 2 11 13M22 2l-7 20-4-9-9-4z',menu:'M3 6h18M3 12h18M3 18h18',pen:'M17 3l4 4L8 20H4v-4z',reply:'M9 17 4 12l5-5M4 12h11a5 5 0 0 1 5 5v2',filt:'M3 4h18l-7 8v6l-4 2v-8z',chk:'M20 6 9 17l-5-5',wand:'M15 4V2M15 10V8M11 6H9M21 6h-2M3 21l12-12',bld:'M4 21V5l8-3v19M12 9h8v12M8 8h.01M8 12h.01M8 16h.01M16 13h.01M16 17h.01',heart:'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8z',doc:'M14 2H6v20h12V6zM9 13h6M9 17h6',lib:'M4 4v16M9 4v16M14 5l4 15',vol:'M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14',mute:'M11 5 6 9H2v6h4l5 4zM22 9l-6 6M16 9l6 6',trash:'M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15',dots:'M12 5h.01M12 12h.01M12 19h.01',bell:'M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0',vid:'M15 10l5-3v10l-5-3zM3 6h12v12H3z',bot:'M12 8V4M9 4h6M5 8h14v11H5zM9 13v1M15 13v1M9 17h6'};
+const LV=['Ramp Acceleration','In-Flow Activation','Content Velocity','Coaching Precision','Revenue Proof'];
+const D={
+globex:{n:'Globex - Platform Expansion',co:'Globex Corporation',st:'Negotiation',am:'$240K',af:'$240,000',cl:'Dec 18, 2026',dom:'globex.example',ind:'Industrial Manufacturing',hq:'Springfield, Oregon',emp:'2,400',fd:'1998',pr:'Data Platform, Governance, AI Studio',cp:'Stratus Data',ig:'Gmail, Salesforce',pc:1,
+dsr:['Globex - 2026','Lena Ortiz','2h ago',14,6,22],
+ppl:[['Marcus Hale','Chief Revenue Officer',0,'Economic buyer',2,3],['Lena Ortiz','VP Sales',1,'Champion',4,6],['Raj Mehta','Director, Enablement',2,'Evaluator',3,4],['Dana Wu','RevOps Manager',2,'Evaluator',2,2],['Owen Blake','IT Security Lead',1,'Possible blocker',1,1],['Sofia Grant','Procurement Manager',1,'Approver',1,2]],
+mt:[['Tue','Nov 17, 2026','Pricing Review - Globex','41:20','Negotiation','Lena confirmed budget for 180 seats and asked for a multi-year option. Marcus wants proof the rollout will not slow down Q1 pipeline. Procurement joins the next call.',['Send revised multi-year proposal','Share Fabrikam rollout plan','Book security review with Owen']],['Thu','Nov 5, 2026','Technical Validation - Globex','52:08','Evaluation','Raj and Dana walked through the Salesforce mapping and approved the pilot scope. Owen raised data residency questions that still need a written answer.',['Send data residency FAQ','Confirm pilot success criteria']]],
+sum:'Globex is expanding from a 40 seat pilot to 180 seats across North America sales. The champion, Lena Ortiz, is pushing for signature before Dec 18. Pricing is agreed in principle; procurement and a security review are the last two steps.',
+nx:['Send revised multi-year proposal to Lena','Share the Fabrikam rollout plan with Marcus','Book the security review with Owen Blake','Loop in Sofia Grant on paper process'],
+rk:[['hi','Security review not yet scheduled, and Owen Blake has not engaged since Nov 5.'],['md','Stratus Data offered a discount during the pilot window.'],['md','Economic buyer has attended 2 of 6 meetings.'],['lo','Close date sits two days before Globex holiday freeze.']],
+tr:['Plants are adding sensors faster than data teams can govern them','Buyers expect AI features to ship with governance, not after it','Consolidation of point tools into one platform budget'],
+pn:[['Reps rebuild the same proposal for every plant',2],['New hires take a full quarter to run a solo demo',0],['Managers coach from notes, not from calls',3],['No link between content used and deals won',4]]},
+initech:{n:'Initech - New Business',co:'Initech',st:'Discovery',am:'$85K',af:'$85,000',cl:'Feb 27, 2027',dom:'initech.example',ind:'Financial Software',hq:'Austin, Texas',emp:'640',fd:'2009',pr:'Data Platform, AI Studio',cp:'Stratus Data',ig:'Gmail, HubSpot',pc:0,
+dsr:['Initech - Discovery','Priya Nair','yesterday',6,3,9],
+ppl:[['Priya Nair','VP Sales',1,'Champion',2,2],['Ana Silva','Chief Revenue Officer',0,'Economic buyer',1,0],['Tom Becker','Sales Enablement Lead',2,'Evaluator',2,1],['Wes Carter','Data Engineering Lead',2,'Evaluator',1,1]],
+mt:[['Thu','Nov 19, 2026','Discovery Call - Initech','36:45','Discovery','Priya described slow onboarding for a new SMB team and a reporting backlog in RevOps. She wants a technical deep dive with Wes before involving Ana.',['Send discovery recap','Schedule technical deep dive']]],
+sum:'Initech is early in discovery. Priya Nair owns the problem: a new SMB sales team that cannot ramp fast enough. The CRO has not engaged yet, so the next step is a technical deep dive that builds a business case Priya can take upward.',
+nx:['Send discovery recap to Priya','Confirm the Nov 25 technical deep dive','Share the onboarding case study','Ask Priya for an intro to Ana Silva'],
+rk:[['hi','Single threaded: only Priya is active.'],['md','No budget identified for this fiscal year.'],['lo','Current CRM data quality is unknown.']],
+tr:['Regulators asking for clearer data lineage in reporting','Mid-market fintech teams consolidating their tool stack','Rapid hiring of SMB sales teams'],
+pn:[['New SMB reps need months to ramp',0],['RevOps reports are built by hand each week',4],['Reps cannot find approved compliance answers',1]]},
+acme:{n:'Acme Corp - Renewal + Upsell',co:'Acme Corp',st:'Qualification',am:'$150K',af:'$150,000',cl:'Jan 30, 2027',dom:'acme.example',ind:'Consumer Products',hq:'Phoenix, Arizona',emp:'5,100',fd:'1984',pr:'Governance, AI Studio',cp:'In-house build',ig:'Gmail, Salesforce, Zoom',pc:1,
+dsr:['Acme - Renewal 2027','Jules Moreno','5d ago',9,4,14],
+ppl:[['Daniel Price','Chief Revenue Officer',0,'Economic buyer',1,1],['Rachel Kim','Security & Compliance Manager',1,'Approver',2,2],['Jules Moreno','Head of Enablement',1,'Champion',3,4],['Kevin Shah','Sales Director',2,'Evaluator',1,1]],
+mt:[['Fri','Nov 13, 2026','Renewal Kickoff - Acme','29:10','Qualification','Jules shared that adoption is strong in the West region and weak in the East. Daniel wants a plan to lift East adoption before agreeing to the upsell.',['Draft East region adoption plan','Send security questionnaire answers']]],
+sum:'Acme renews in January and is evaluating an upsell to AI Studio. Adoption is uneven by region. Rachel Kim is reviewing the security questionnaire, and Daniel Price wants a regional adoption plan before he commits.',
+nx:['Return the security questionnaire to Rachel','Draft an East region adoption plan','Book a review with Daniel Price'],
+rk:[['md','East region adoption lags behind West.'],['md','Internal team proposed building in-house instead.'],['lo','Security questionnaire due Nov 27.']],
+tr:['Retail partners asking for faster product data','AI pilots moving from marketing into sales','Pressure to cut overlapping software spend'],
+pn:[['Regional teams use different sales content',2],['Field managers lack time to coach',3],['Renewal value is hard to prove',4]]}};
+const M=[['Lena Ortiz','Re: Revised pricing for 180 seats','Thanks Matthew, the team reviewed the revised proposal and we are close.','10:42 AM','globex',1,['Hi Matthew,','Thanks for sending the revised proposal. The team reviewed it this morning and we are close. Marcus is comfortable with the per seat price but would like a multi-year option before we take it to procurement.','Could you also send something on how Fabrikam rolled out across regions? Marcus wants confidence that Q1 pipeline will not slip during onboarding.','Best,<br>Lena']],
+['Priya Nair','Follow-up from our discovery call','Great chat yesterday. A few questions on the onboarding rollout.','9:15 AM','initech',1,['Hi Matthew,','Great chat yesterday. A few questions came up after I briefed Tom: how long does a typical onboarding take, and can we start with just the SMB team?','We are holding Nov 25 for the deep dive with Wes.','Thanks,<br>Priya']],
+['Rachel Kim','Security questionnaire for Northstar','Attached is our vendor security questionnaire for the renewal.','8:03 AM','acme',1,['Hello Matthew,','Attached is our vendor security questionnaire for the renewal review. We need responses by Nov 27 so we can close the review before the holidays.','Regards,<br>Rachel Kim<br>Security & Compliance, Acme Corp']],
+['Deal Desk','Globex multi-year approval needed','Requesting approval for the Globex multi-year structure.','Yesterday','globex',0,['Hi Matthew, the multi-year structure for Globex is in the approval queue. Please add the business justification in the CRM before Friday.']],
+['Raj Mehta','Pilot success criteria','Sharing the success criteria we drafted for the expansion.','Yesterday','globex',0,['Hi Matthew,','Sharing the success criteria we drafted: time to first demo for new reps, content usage in live deals, and manager coaching coverage. Let me know if anything is missing.','Raj']],
+['Calendar','Invitation: Initech technical deep dive','Wed Nov 25, 11:00 AM - 12:00 PM','Yesterday','initech',0,['Invitation: Initech technical deep dive. Wed Nov 25, 11:00 AM - 12:00 PM. Guests: Priya Nair, Wes Carter, Matthew Torres.']],
+['Sales Ops','Weekly forecast reminder','Please update commit and best case by Friday noon.','Nov 18',0,0,['Please update commit and best case by Friday noon so we can roll up the forecast.']],
+['Jules Moreno','Intro: Acme enablement team','Looping in Kevin who runs the East region.','Nov 18','acme',0,['Hi Matthew,','Looping in Kevin Shah, who runs the East region. He is the right person to shape the adoption plan with us.','Jules']],
+['Marketing','New case study: Fabrikam ramp story','A new customer story is live in the content library.','Nov 17',0,0,['A new customer story is live in the content library: how Fabrikam rolled out Northstar across four regions.']],
+['Dana Wu','Salesforce field mapping','Can you confirm which opportunity fields sync?','Nov 17','globex',0,['Hi Matthew, can you confirm which opportunity fields sync both ways? I want to finalize the mapping before the pilot expands.','Dana']],
+['Team Updates','SKO agenda: draft for review','Draft agenda for the January kickoff is ready.','Nov 16',0,0,['The draft agenda for the January sales kickoff is ready for comments.']],
+['Northstar Academy','Course reminder: Negotiation Essentials','You have a course waiting in your learning plan.','Nov 14',0,0,['You have a course waiting in your learning plan: Negotiation Essentials.']]];
+const A=[['Northstar Platform Overview','doc','Sales Decks'],['Globex Pricing Proposal','pdf','Accounts'],['Fabrikam Case Study','pdf','Case Studies'],['Contoso Migration Story','vid','Customer Stories'],['Battlecard: Stratus Data','pg','Competition'],['Security Overview','pdf','InfoSec'],['Discovery Call Role Play: VP Sales','pg','Training Resources'],['ROI Calculator Walkthrough','vid','Product Collaterals'],['Analyst Report: Data Platforms 2026','pdf','Analyst Reports'],['Manufacturing Sales Play','pg','Sales Plays'],['Persona: VP Sales','pg','Personas'],['Executive Briefing Deck','doc','Sales Decks'],['Governance One-Pager','pdf','Product Collaterals'],['EU Data Residency FAQ','pg','FAQs']];
+const TREE={Favorites:[0,2,4],'My Folder':[],Library:{'Analyst Reports':[8],'Case Studies':[2,3],'Sales Decks':[0,11]},Views:{AE:{Competition:[4],'Sales Plays':[9]},SDR:{Personas:[10]}},'Shared With Me':[1,7],Workspace:{Accounts:{Globex:[1],Initech:[],'Acme Corp':[5]}}};
+const FQ=[['How does Northstar compare with Stratus Data?','Northstar runs as a managed cloud service with governance built in, while Stratus Data is usually self-hosted with governance sold as an add-on.'],['Do you support single sign-on?','Yes. Northstar supports SAML single sign-on and SCIM user provisioning.'],['Can we keep data in the EU?','Yes. Customers can choose an EU region during setup, and data stays in that region.'],['What does onboarding look like?','A named CSM runs a kickoff, a pilot with one team, and a phased rollout by region.']];
+const RC=[['Name Drop','nd',[['Fabrikam',3,'Manufacturing','Data Platform, Governance','Green','2023','Rolled out to four regions in ten weeks',[['Fabrikam Case Study','pdf'],['Fabrikam Review','pg']]],['Contoso',3,'Manufacturing','Data Platform','Green','2022','Replaced a self-hosted stack',[['Contoso Migration Story','vid']]],['Northwind Traders',2,'Distribution','Governance','Green','2024','Cut proposal prep time in half',[['Governance One-Pager','pdf']]]]],
+['Customer Evidence','as',[['Fabrikam Case Study','pdf',3,'Same industry, similar seat count'],['Contoso Migration Story','vid',2,'Won against Stratus Data'],['Fabrikam Review','pg',2,'Customer review']]],
+['Competition','as',[['Battlecard: Stratus Data','pg',3,'Competitor on this deal'],['Self-hosted vs managed: TCO guide','pdf',2,'Common objection at this stage']]],
+['Product','as',[['Governance One-Pager','pdf',3,'Product on this deal'],['ROI Calculator Walkthrough','vid',2,'Negotiation stage asset'],['Security Overview','pdf',2,'Security review pending']]],
+['FAQs','fq',FQ],
+['Guided Discovery Questions','gq',['What would slow your Q1 pipeline during rollout?','Who signs off on multi-year terms?','How do you measure ramp time for new reps today?','What did the Stratus Data pilot get right?']],
+['Thought Leadership','as',[['Analyst Report: Data Platforms 2026','pdf',2,'Industry trend match'],['Webinar: Governance by default','vid',2,'Persona interest']]],
+['Coaching','co',[['Pitching against Stratus Data','4 min'],['Discovery for manufacturing','12 min'],['Negotiating multi-year deals','6 min']]],
+['Persona','pe',[['VP Sales','Owns ramp time and forecast accuracy.','Proof that the rollout will not slow pipeline.'],['Chief Revenue Officer','Owns the number and the headcount plan.','Clear ROI tied to their own data.'],['IT Security Lead','Owns data residency and access.','Written answers before any pilot expands.']]],
+['Sales Plays','as',[['Manufacturing Sales Play','pg',3,'Industry match'],['Multi-year expansion play','pg',2,'Stage match']]]];
+const REC=[['Fabrikam Case Study','Case Study',3,'pdf','ips'],['Contoso Migration Story','Case Study',2,'vid','ic'],['Battlecard: Stratus Data','Competition',3,'pg','cs'],['Self-hosted vs managed: TCO guide','Competition',2,'pdf','c'],['Governance One-Pager','Product',3,'pdf','ps'],['ROI Calculator Walkthrough','Product',2,'vid','s'],['Persona: VP Sales','Persona',3,'pg','e'],['Analyst Report: Data Platforms 2026','Thought Leadership',2,'pdf','i'],['Manufacturing Sales Play','Sales Plays',3,'pg','is']];
+const PR=[['Analyze Rep Skills',2],['Assign Training to Rep',2],['Battlecard',4],['Case Study',7],['Content Expiration and Verification',1],['Discovery Guide',4],['Draft Meeting Follow-Up',2],['Persona Guide',2],['Talk Track',3],['Win/Loss Analysis',3]];
+const SK=['deal-review','call-prep-brief','objection-handler','exec-summary','pricing-guardrails'];
+const LN=['English','German','French','Spanish','Japanese','Korean','Portuguese','Italian','Dutch','Hindi'];
+const RNG=[['Oct 21 - Nov 20',[['Tue','Nov 17','Pricing Review - Globex','10:00 AM','globex'],['Thu','Nov 19','Discovery Call - Initech','3:00 PM','initech']]],['Nov 20 - Dec 20',[['Tue','Nov 24','Globex pricing walkthrough','2:00 PM','globex'],['Wed','Nov 25','Initech technical deep dive','11:00 AM','initech'],['Thu','Dec 3','Acme security review','4:30 PM','acme']]],['Dec 20 - Jan 19',[]]];
+const DS=[['Northstar + Globex','22 assets · active 2h ago','globex'],['Northstar + Initech','9 assets · active yesterday','initech'],['Northstar + Acme Corp','14 assets · no recent activity','acme']];
+const LR=[['Account Research',1,15],['Product Knowledge',6,14],['Negotiation Essentials',0,8]];
+const SEC=[['mt','Meetings'],['ar','Account Research'],['su','Summary'],['fu','Follow Up Action Items'],['sn','Deal Snapshot'],['rc','AI Recommendations'],['rk','Deal Risks'],['sh','Stakeholders'],['fi','Company Firmographics'],['il','Industry Landscape'],['ch','Sales and Revenue Enablement Challenges'],['pm','People Map / Hierarchy']];
+const EV=[[0,2,10,11,'Pricing Review - Globex','globex',['Lena Ortiz|y','Marcus Hale|y']],[0,1,9.5,10,'Weekly pipeline review',0,['Jordan Lee|y','Ava Chen|y']],[0,3,13,13.5,'Content sync with Marketing',0,['Nina Park|y']],[0,4,15,16,'Discovery Call - Initech','initech',['Priya Nair|y']],
+[1,1,9.5,10,'Weekly pipeline review',0,['Jordan Lee|y','Ava Chen|y']],[1,1,14,14.75,'Acme renewal check-in','acme',['Jules Moreno|y','Kevin Shah|a']],[1,2,14,15,'Globex pricing walkthrough','globex',['Lena Ortiz|y','Marcus Hale|a','Ben Ito|a']],[1,3,11,12,'Initech technical deep dive','initech',['Priya Nair|y','Wes Carter|y','Tom Becker|a']],[1,3,16,16.5,'1:1 with Jordan',0,['Jordan Lee|y']],[1,4,-1,0,'Office closed',0,[]],[1,5,10,10.5,'Globex security review','globex',['Owen Blake|a','Dana Wu|y']],
+[2,1,9.5,10,'Weekly pipeline review',0,['Jordan Lee|y','Ava Chen|y']],[2,2,15,15.5,'Initech pilot scoping','initech',['Priya Nair|a','Wes Carter|a']],[2,4,16.5,17.5,'Acme security review','acme',['Rachel Kim|y','Jules Moreno|a']]];
+const TP=[['Post-Demo: Quick Recap & Resources','t','Recap and resources from today','Hi {f},\n\nThanks for the time today. As promised, here are the resources we covered:\n- Platform overview deck\n- Fabrikam case study\n- Security overview\n\nHappy to answer anything before our next call.\n\nBest,\nMatthew'],
+['Post-Demo: Summary & Next Steps','t','Summary and next steps','Hi {f},\n\nGreat session today. Quick summary of what we heard:\n- New reps need to ramp faster\n- Content has to show up inside the tools reps already use\n\nNext steps:\n- Pilot scope review next week\n- Security review with your IT team\n\nDoes Tuesday work for the pilot review?\n\nBest,\nMatthew'],
+['First Touch: Inbound Form Follow-Up','t','Thanks for reaching out','Hi {f},\n\nThanks for reaching out about Northstar. I would love to hear what prompted the search at {co}. Do you have 20 minutes this week?\n\nBest,\nMatthew'],
+['Security Review: Next Steps','t','Security review for {co}','Hi {f},\n\nTo keep things moving, I have attached our security overview. Could you share who on your side should join a 30 minute review?\n\nThanks,\nMatthew'],
+['Tailored Solution & Pricing','m','Proposal for {co}','Hi {f},\n\nAttached is the proposal tailored to {co}, including the multi-year option your team asked about. Happy to walk your leadership team through it whenever suits.\n\nBest,\nMatthew'],
+['Champion Check-In','m','Quick check-in','Hi {f},\n\nChecking in ahead of the next step. Is there anything you need from me to bring the rest of the team along?\n\nThanks,\nMatthew'],
+['Renewal: Value Recap','t','Your year with Northstar','Hi {f},\n\nAhead of the renewal, here is a short recap of the value your team saw this year, plus a few ideas for the year ahead.\n\nBest,\nMatthew'],
+['Executive Intro Request','m','Intro request','Hi {f},\n\nWould you be open to introducing me to your CRO? A 20 minute conversation would help us line up the rollout with company goals.\n\nThanks,\nMatthew']];
+return{P,LV,D,M,A,TREE,FQ,RC,PR,SK,LN,RNG,DS,LR,SEC,EV,TP,REC}})();if(window.GBXA)GBXA();
+</script>
+<script>
+
+window.GBXA=()=>{
+const R=document.getElementById('gbx'),G=window.GBXD;if(!G||window.GBXON)return;if(!R){document.addEventListener('DOMContentLoaded',GBXA,{once:1});return}window.GBXON=1;
+const{P,LV,D,M,A,TREE,FQ,RC,PR,SK,LN,RNG,DS,LR,SEC,EV,TP,REC}=G;
+const DEMO='https://gtmbuddy.ai/';
+const I=(n,c='')=>`<svg viewBox="0 0 24 24" class="${c}"><path d="${P[n]}"/></svg>`;
+const LG='<svg viewBox="0 0 44 45" class="lgo"><path d="M6.5 5.9C6.5 4.9 6.8 3.9 7.4 3.1C7.9 2.3 8.7 1.6 9.7 1.2C10.6 0.9 11.6 0.8 12.6 1.0C13.6 1.2 14.5 1.7 15.3 2.4C16.0 3.1 16.5 4.0 16.6 5.0C16.8 6.0 16.7 7.0 16.3 8.0C16.0 8.9 15.3 9.7 14.5 10.3C13.6 10.8 12.6 11.1 11.6 11.1C10.9 11.1 10.2 11.0 9.6 10.7C9.0 10.5 8.4 10.1 7.9 9.6C7.5 9.1 7.1 8.6 6.8 7.9C6.6 7.3 6.5 6.6 6.5 5.9ZM27.2 5.9C27.2 4.9 27.5 3.9 28.0 3.1C28.6 2.3 29.4 1.6 30.4 1.2C31.3 0.9 32.3 0.8 33.3 1.0C34.3 1.2 35.2 1.7 35.9 2.4C36.7 3.1 37.1 4.0 37.3 5.0C37.5 6.0 37.4 7.0 37.0 8.0C36.6 8.9 36.0 9.7 35.1 10.3C34.3 10.8 33.3 11.1 32.3 11.1C31.6 11.1 30.9 11.0 30.3 10.7C29.7 10.5 29.1 10.1 28.6 9.6C28.1 9.1 27.8 8.6 27.5 7.9C27.3 7.3 27.1 6.6 27.2 5.9V5.9ZM18.2 43.7C6.9 41.9 -0.6 31.0 0.9 19.7L1.2 17.7C1.2 17.7 1.2 17.6 1.3 17.5C1.3 17.4 1.4 17.3 1.5 17.3C1.5 17.2 1.6 17.2 1.7 17.2C1.8 17.2 1.9 17.2 2.0 17.2L7.0 17.9C7.1 17.9 7.3 18.0 7.4 18.2C7.5 18.3 7.6 18.5 7.5 18.7L7.3 20.6C6.1 28.5 11.3 36.1 19.2 37.4C22.5 37.9 25.9 37.3 28.8 35.7C31.8 34.0 34.0 31.4 35.3 28.2L31.9 27.7C31.8 27.7 31.7 27.7 31.7 27.7C31.6 27.6 31.5 27.6 31.5 27.5C31.4 27.4 31.4 27.3 31.3 27.2C31.3 27.2 31.3 27.1 31.3 27.0L36.1 22.2C36.2 22.1 36.3 22.1 36.4 22.0C36.6 22.0 36.7 22.0 36.8 22.0L42.2 22.8C42.4 22.8 42.5 22.9 42.6 23.0C42.7 23.2 42.8 23.4 42.8 23.5L42.4 26.0C42.0 28.8 41.1 31.4 39.6 33.8C38.2 36.2 36.3 38.3 34.0 39.9C31.8 41.6 29.2 42.8 26.5 43.4C23.8 44.1 21.0 44.2 18.2 43.7Z"/></svg>';
+const es=s=>s.replace(/[&<>"]/g,c=>'&#'+c.charCodeAt(0)+';');
+const ini=n=>n.split(' ').map(x=>x[0]).join('').slice(0,2);
+const pl=(t,c='')=>`<span class="pl ${c}">${t}</span>`;
+const st=n=>`<span class="stz">${[1,2,3].map(i=>I('star','f'+(i>n?' o':''))).join('')}</span>`;
+const AIK='su fu rk fi il ch pm',GK='fi il ch pm';
+let S;
+const init=()=>S={tab:'home',d:'globex',o:new Set(),g:{},hc:new Set(),rg:1,ch:null,cc:1,lang:'English',menu:null,mf:'Inbox',mo:null,mq:'',rp:0,rt:'',star:new Set([0,4]),rd:new Set(),tx:'',dq:'',lq:'',cq:'',cf:0,cp:[],fq:'',done:new Set(),grid:0,key:1,po:1,tour:0,cn:new Set(['Salesforce','Gmail']),v:'mail',cm:null,cpo:null,ctq:'',rv:0,rf:'All',rr:null,ctx:0,tmy:1,ttm:1,tq:'',te:null,ep:null,mp:null,wk:1,rs:{},ctc:new Set(),sp:new Set([0,1])};
+const $=s=>R.querySelector(s);
+const W=ms=>new Promise(r=>setTimeout(r,ms));
+let tt;const toast=m=>{const t=$('.ts');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)};
+const fld=['Inbox','Starred','Snoozed','Sent','Drafts'],fic=['inbox','star','clk','sndm','file'];
+function shell(){R.innerHTML=`<div class="w"><div class="br"><div class="dt"><i></i><i></i><i></i></div><div class="url"></div><div class="tbx"><button class="tr" data-a="tour" data-v="mail"></button><button class="tr" data-a="tour" data-v="cal"></button><button class="tr vo" data-a="vo"></button></div></div><div class="ap"><div class="as">${[['mail','mail','Mail'],['cal','cal','Calendar']].map(x=>`<button data-a="app" data-v="${x[0]}"><span>${I(x[1])}</span>${x[2]}</button>`).join('')}</div><div class="ml"></div><div class="px"><div class="hd">${LG}GTM Buddy<span class="av me">M</span><button class="cx" data-a="close" aria-label="Close panel">${I('x')}</button></div><div class="tb"></div><div class="bd"></div><div class="cwr"></div><div class="nt">AI-generated content. Kindly verify before use.</div></div><div class="rl"><button data-a="pt" aria-label="GTM Buddy">${LG}</button><button data-a="noop">${I('cal')}</button><button data-a="noop">${I('chk')}</button></div></div><div class="ts"></div><div class="gt"></div><div class="fc"><svg viewBox="0 0 24 24"><path d="M4 2l15 11-6.5 1.2L16 21l-3 1.4-3.6-6.9L4 20z"/></svg></div></div>`}
+function rAll(){rMain();rPanel()}
+const trL=()=>{R.querySelectorAll('[data-a=tour]').forEach(b=>{const v=b.dataset.v,on=S.tour&&TPR==v;b.textContent=on?'Stop tour':v=='mail'?'Email tour':'Calendar tour';b.classList.toggle('on',!!on)});const vb=$('.vo');vb.innerHTML=I(VO?'vol':'mute')+(VO?'Voice on':'Voice off');vb.classList.toggle('on',!!VO)};
+function rMain(){trL();R.querySelectorAll('.as button').forEach(b=>b.classList.toggle('on',b.dataset.v==S.v));$('.url').textContent=S.v=='mail'?'mail.northstar.example/inbox':'calendar.northstar.example/week';if(S.v=='cal')return rCal();$('.ml').innerHTML=`<div class="mt"><div class="mlg">${I('menu')}${I('mail')}Mail</div><label class="ms">${I('srch')}<input data-i="mq" placeholder="Search mail" value="${es(S.mq)}"></label></div><div class="mb"><div class="nv"></div><div class="ls"></div></div><div class="cmw"></div>`;rNav();rList();rCm()}
+const fm=h=>{let H=Math.floor(h),m=Math.round((h-H)*60),p=H>=12?'pm':'am';H=H%12||12;return H+(m?':'+String(m).padStart(2,'0'):'')+p};
+const dt=(w,i)=>{const n=15+w*7+i;return n>30?[n-30,'December']:[n,'November']};
+const DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const ecol=e=>e[2]<0?'#0b8043':e[5]?'#1a73e8':'#7986cb';
+const gst=e=>['Matthew Torres|o',...e[6]].map(g=>g.split('|'));
+function rCal(){const w=S.wk,ev=EV.map((e,i)=>[e,i]).filter(x=>x[0][0]==w),H=[...Array(11)].map((x,i)=>i+8);
+$('.ml').innerHTML=`<div class="ct">${I('menu')}<span class="clg">${I('cal')}<span>Calendar</span></span><button class="tdy" data-a="cw" data-v="t">Today</button><button class="ic" data-a="cw" data-v="-1" aria-label="Previous week">${I('left')}</button><button class="ic" data-a="cw" data-v="1" aria-label="Next week">${I('chev')}</button><h3>${w==2?'Nov - Dec 2026':'November 2026'}</h3><span class="wkp">Week${I('down')}</span></div><div class="cbx"><div class="cs"><button class="crt" data-a="ts" data-v="Creating events works in the full calendar">${I('plus')}Create</button><div class="mlb">November 2026</div><div class="mm">${'SMTWTFS'.split('').map(x=>`<b>${x}</b>`).join('')}${[...Array(35)].map((x,i)=>{const n=i+1,wi=Math.floor((n-15)/7);return`<button class="${n>30?'x':''} ${n==23?'td':wi==w&&n>=15?'sw':''}" data-a="md" data-v="${n}">${n>30?n-30:n}</button>`}).join('')}</div><div class="mc"><div class="mlb">My calendars</div>${[['Matthew Torres','#1a73e8'],['Tasks','#3f51b5'],['Holidays','#0b8043']].map(c=>`<div><i style="background:${c[1]}">${I('chk')}</i>${c[0]}</div>`).join('')}</div></div><div class="cgw"><div class="chd"><div></div>${[...Array(7)].map((x,i)=>`<div class="${w==1&&i==1?'tdc':''}">${DN[i].slice(0,3).toUpperCase()}<b>${dt(w,i)[0]}</b></div>`).join('')}</div><div class="cad"><div class="gl">GMT-05</div>${[...Array(7)].map((x,i)=>`<div>${ev.filter(([e])=>e[1]==i&&e[2]<0).map(([e,k])=>`<span data-a="ev" data-v="${k}">${e[4]}</span>`).join('')}</div>`).join('')}</div><div class="csc"><div class="cgr"><div>${H.map(h=>`<div class="hc">${h%12||12} ${h<12?'AM':'PM'}</div>`).join('')}</div>${[...Array(7)].map((x,i)=>`<div class="dc">${w==1&&i==1?'<i class="nl" style="top:154px"></i>':''}${ev.filter(([e])=>e[1]==i&&e[2]>=0).map(([e,k])=>`<button class="ev ${w==0||w==1&&(i<1||i==1&&e[3]<=11.5)?'ps':''} ${S.ep==k||S.mp==k&&S.po?'sel':''}" style="top:${(e[2]-8)*44}px;height:${(e[3]-e[2])*44-2}px;background:${ecol(e)}" data-a="ev" data-v="${k}"><b>${e[4]}</b>${e[3]-e[2]>.6?fm(e[2])+' - '+fm(e[3]):''}</button>`).join('')}</div>`).join('')}</div></div>${S.ep!=null?epop():''}</div></div>`;
+if(S.ep!=null){const p=$('.ep'),g=$('.cgw').getBoundingClientRect(),el=$(`[data-a="ev"][data-v="${S.ep}"]`);if(!el)return;const r=el.getBoundingClientRect();let L=r.right-g.left+8;if(L+p.offsetWidth>g.width-8)L=r.left-g.left-p.offsetWidth-8;p.style.left=Math.max(8,L)+'px';p.style.top=Math.max(8,Math.min(r.top-g.top-60,g.height-p.offsetHeight-8))+'px'}}
+function epop(){const e=EV[S.ep],d=D[e[5]],gs=gst(e),[n,mo]=dt(e[0],e[1]),rs=S.rs[S.ep]||(e[5]?'':'Yes'),y=gs.filter(g=>g[1]!='a').length;
+const row=(ic,h)=>`<div class="epr">${ic}<div style="flex:1;min-width:0">${h}</div></div>`;
+const an=S.epa;S.epa=0;return`<div class="ep ${an?'an':''}"><div class="epa">${[['pen','Editing works in the full calendar'],['trash','Deleting is off in this preview'],['mail','Email guests works in the full calendar'],['dots','More options in the full calendar']].map(x=>`<button class="ic" data-a="ts" data-v="${x[1]}">${I(x[0])}</button>`).join('')}<button class="ic" data-a="epx" aria-label="Close">${I('x')}</button></div>
+${row(`<i class="sw" style="background:${ecol(e)}"></i>`,`<h4>${e[4]}</h4><div>${DN[e[1]]}, ${mo} ${n}${e[2]<0?'':' · '+fm(e[2])+' - '+fm(e[3])}</div>${/Weekly/.test(e[4])?'<div>Weekly on Monday</div>':''}`)}
+${d?row(`<span class="eic">${LG}</span>`,`<button class="mpb" data-a="prep">Meeting Prep</button>`):''}
+${e[2]<0?'':row(I('vid'),`<button class="jv" data-a="ts" data-v="Video calls open in the full product">Join video call</button><div class="mu" style="margin-top:6px">meet.example/${e[4].toLowerCase().replace(/[^a-z]+/g,'-').slice(0,18)}</div>`)}
+${gs.length>1?row(I('users'),`<div>${gs.length} guests</div><div class="mu">${y} yes, ${gs.length-y} awaiting</div>${gs.map(g=>{const ext=d&&!d.ppl.some(p=>p[0]==g[0])&&g[1]!='o',em=g[0].split(' ')[0].toLowerCase()+'@'+(d&&g[1]!='o'?d.dom:'northstar.example');return`<div class="gu"><span class="av" style="background:${g[1]=='o'?'#4b3a33':'#8a9aa8'}">${ini(g[0])}</span><div class="tt"><div>${g[0]}</div><div class="mu">${g[1]=='o'?'Organizer':em}</div></div>${ext?(S.ctc.has(g[0])?'<span class="mu">In CRM</span>':`<button class="adc" data-a="addc" data-v="${g[0]}">+ Contact</button>`):''}</div>`}).join('')}`):''}
+${e[2]<0?'':row(I('bell'),'10 minutes before')}${row(I('cal'),'Matthew Torres')}
+${e[2]<0?'':`<div class="epf"><span>Going?</span>${['Yes','No','Maybe'].map(x=>`<button class="${rs==x?'on':''}" data-a="rsvp" data-v="${x}">${x}</button>`).join('')}</div>`}</div>`}
+function prep(){const e=EV[S.mp],d=D[e[5]];return`<div class="mch">${I('cal')}<span>Meeting Prep - ${e[4]}</span><button data-a="mpx" aria-label="Close meeting prep">${I('x')}</button></div><div class="pdr"><span class="sb2">${d.n}</span><button class="ic" data-a="ctx" aria-label="Deal context">${I('info')}</button>${pl('Stage: '+d.st,'bb')}</div>${S.ctx?`<div class="ctc fi"><div class="lb">Context</div><div class="cig">${[['Opportunity',d.n],['Stage',d.st],['Industry',d.ind],['Products',d.pr],['Competitors',d.cp]].map(q=>`<div class="mu">${q[0]}</div><div>${q[1]}</div>`).join('')}</div></div>`:''}<div class="cd rpc"><span class="rbi">${I('bot')}</span><div style="flex:1"><b>Prepare with AI Role Play</b><div class="mu">Rehearse this meeting with AI buyers built from the deal's calls.</div></div><button class="bt" data-a="prac">${I('play')}Practice</button></div>`+[['rc','AI Recommendations'],['mt','Previous Meetings'],['sh','Attendees and Stakeholders'],['ar','Account Research'],['rk','Deal Risks'],['cpl','Call Plan'],['dp','Deal Progress'],['ac2','Activity'],['fu','Follow Up Action Items'],['su','Summary'],['sp','Share This']].map(([k,t])=>acc(k,t,d)).join('')}
+const RF=['All','Case Study','Competition','Product','Persona','Thought Leadership','Sales Plays'];
+const rsnL=(k,d)=>[...k].map(q=>({i:'Industry: '+d.ind,p:'Products: '+d.pr,c:'Competitor: '+d.cp,s:'Stage: '+d.st,e:'High seller engagement'}[q]));
+function rec(){const d=D[S.d]||D.globex,L=REC.map((x,i)=>[x,i]).filter(([x])=>S.rf=='All'||x[1]==S.rf);return`<div class="cht"><button class="ic" data-a="rvx" aria-label="Back">${I('left')}</button><span>AI Recommended for ${d.co}</span></div><div class="fch">${RF.map(f=>`<button class="${S.rf==f?'on':''}" data-a="rf" data-v="${f}">${f}</button>`).join('')}</div>`+L.map(([x,i])=>`<div class="rci2"><div class="rch">${pl(x[1],'g')}${st(x[2])}<button class="ic" data-a="rsn" data-v="${i}" aria-label="Why recommended">${I('info')}</button></div><div class="rcn">${ft(x[3])}<span>${x[0]}</span>${addb(x[0])}</div>${S.rr==i?`<div class="rsn fi"><b>Reasons for recommendation</b>${ul(rsnL(x[4],d))}</div>`:''}</div>`).join('')}
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
+const ctl=()=>{const q=S.ctq.toLowerCase();return[['m','My Templates'],['t','Team Templates']].map(([o,n])=>{const L=TP.map((t,i)=>[t,i]).filter(([t])=>t[1]==o&&t[0].toLowerCase().includes(q));return`<div class="lb">${n} (${L.length})</div>`+L.map(([t,i])=>`<button data-a="cti" data-v="${i}">${I('lines')}${t[0]}</button>`).join('')}).join('')};
+const gbar=()=>{const c=S.cm,d=D[c.d];return`<span class="eic">${LG}</span><button class="dch" data-a="cdd"><b>${d?d.n:'Select deal'}</b>${I('down')}</button><button class="mpb sm2" data-a="cmprep">Meeting Prep</button><button class="ctb" data-a="ctp">${I('lines')}Templates</button><button class="cnb" data-a="crc">${I('plus')}Content</button>${S.cpo=='deal'?`<div class="cpp"><div class="fch" style="margin:2px 2px 8px">${['Opportunities','Accounts','Leads'].map((x,i)=>`<button class="${i?'':'on'}" data-a="ts" data-v="${x} work the same way in the full product">${x}</button>`).join('')}</div>${Object.keys(D).map(k=>`<button class="${k==c.d?'on':''}" data-a="cds" data-v="${k}">${I(k==c.d?'chk':'bld')}${D[k].n}</button>`).join('')}</div>`:S.cpo=='tpl'?`<div class="cpp"><label class="sx">${I('srch')}<input data-i="ctq" placeholder="Search templates" value="${es(S.ctq)}"></label><div id="ctl">${ctl()}</div></div>`:''}`};
+const rBar=()=>{const b=$('.gbb');b&&(b.innerHTML=gbar())};
+function rCm(){const e=$('.cmw');if(!e)return;const c=S.cm,an=S.cma;S.cma=0;e.innerHTML=c?`<div class="cmx ${an?'fi':''}"><div class="cmh">New Message<button class="ic" data-a="cmx" aria-label="Close">${I('x')}</button></div><label class="cmf"><span class="mu">To</span><input data-i="cto" value="${es(c.to)}" placeholder="Recipients"></label><label class="cmf"><input data-i="csb" value="${es(c.sub)}" placeholder="Subject"></label><div class="gbb">${gbar()}</div><textarea class="cmb" data-i="cbd" placeholder="Write your email">${es(c.body)}</textarea>${c.lk.length?`<div class="lks">${c.lk.map(l=>`<span class="lkc">${I('ext')}${l}<i>tracked</i></span>`).join('')}</div>`:''}<div class="cft"><button class="bt sndb" data-a="csend">Send</button><span class="mu">Opens and clicks are tracked</span></div></div>`:''}
+const cmap=()=>{const m=/@([\w.-]+)$/.exec(S.cm.to),k=m&&Object.keys(D).find(x=>D[x].dom==m[1]);if(k&&S.cm.d!=k){S.cm.d=k;S.d=k;rBar();rCmp();toast('Mapped to '+D[k].n)}};
+const putT=(t,ap)=>{if(S.v!='mail')return 0;if(S.cm){S.cm.body=ap&&S.cm.body?S.cm.body+'\n\n'+t:t;rCm();return'email'}if(S.mo!=null){S.rp=1;S.rt=ap&&S.rt?S.rt+'\n\n'+t:t;rList();$('.ls').scrollTop=1e4;return'reply'}return 0};
+const putL=n=>{if(S.v=='mail'&&S.cm){S.cm.lk.includes(n)||S.cm.lk.push(n);rCm();return'email'}return putT('Resource: '+n+' (tracked link)',1)};
+const openDeal=k=>{S.d=k;S.tab='deal';S.ch=null;S.mp=null;S.rv=0;S.menu=null;S.po=1;rPanel();$('.bd').scrollTop=0;toast('Meeting prep loaded: '+D[k].n)};
+function rNav(){$('.nv').innerHTML=`<button class="cmpz" data-a="cmp">${I('pen')} Compose</button>`+fld.map((f,i)=>`<button class="ni ${S.mf==f?'on':''}" data-a="mf" data-v="${f}">${I(fic[i])}${f}${i==0?`<span>${M.filter((m,j)=>m[5]&&!S.rd.has(j)).length||''}</span>`:''}</button>`).join('');}
+function rList(){const L=$('.ls');if(S.mo!=null){const m=M[S.mo],d=m[4]&&D[m[4]];L.innerHTML=`<div class="rd"><button class="ic" data-a="back" aria-label="Back">${I('left')}</button><h2>${m[1]} ${d?`<span class="dl">${d.co}</span>`:''}</h2>${d?`<div class="emb"><span class="eic">${LG}</span><button class="mpb" data-a="mprep">Meeting Prep</button><span class="mu">${d.n}</span></div>`:''}<div class="fr"><span class="av">${ini(m[0])}</span><div><b>${m[0]}</b><br><small>to me · ${m[3]}</small></div></div><div class="bdy">${m[6].map(p=>`<p>${p}</p>`).join('')}</div>${S.rp?`<div class="rpl"><div class="mu">To: ${m[0]}</div><textarea data-i="rt" placeholder="Write your reply">${es(S.rt)}</textarea><button class="bt" data-a="sendm">Send</button></div>`:`<div class="rb"><button data-a="rp">${I('reply')}Reply</button><button data-a="noop">Forward</button></div>`}</div>`;return}
+const q=S.mq.toLowerCase();let rows=M.map((m,i)=>[m,i]).filter(([m,i])=>(S.mf=='Inbox'||(S.mf=='Starred'&&S.star.has(i)))&&(!q||(m[0]+m[1]+m[2]).toLowerCase().includes(q)));
+L.innerHTML=`<div class="lh">${I('chk')}${I('clk')}</div>`+(rows.length?rows.map(([m,i])=>`<div class="r ${m[5]&&!S.rd.has(i)?'u':''}" data-a="om" data-v="${i}"><span class="sr ${S.star.has(i)?'on':''}" data-a="star" data-v="${i}">${I('star')}</span><span class="sd">${m[0]}</span><span class="sb">${m[1]} <i>- ${m[2]}</i></span><span class="tm">${m[3]}</span></div>`).join(''):`<div class="emp">${I('inbox')}No conversations in ${S.mf}${q?' match your search':''}.</div>`)}
+function rPanel(){$('.px').classList.toggle('hid',!S.po);$('.ap').classList.toggle('po',!!S.po);$('.rl button').classList.toggle('on',!!S.po);$('.tb').innerHTML=['Home','Deal','Content'].map(t=>`<button class="${S.tab==t.toLowerCase()&&!S.ch&&!S.rv&&S.mp==null?'on':''}" data-a="tab" data-v="${t.toLowerCase()}">${t}</button>`).join('');rBody();rCmp()}
+const card=(k,ic,t,inner,ex='')=>{const op=!S.hc.has(k);return`<div class="cd"><div class="ch" data-a="hc" data-v="${k}">${I(ic)}${t}${ex}${I(op?'down':'chev')}</div>${op?`<div class="cb">${inner}</div>`:''}</div>`};
+function rBody(){const B=$('.bd');B.innerHTML=S.ch?chat():S.rv?rec():S.mp!=null?prep():S.tab=='home'?home():S.tab=='deal'?deal():content();if(S.ch)B.scrollTop=B.scrollHeight}
+function home(){const r=RNG[S.rg];return card('m','cal','My Meetings',r[1].length?r[1].map(x=>`<div class="li" data-a="gd" data-v="${x[4]}"><div class="sq" style="background:#eef2ff;color:var(--b)">${x[1].split(' ')[1]}</div><div class="tt"><div>${x[2]}</div><div class="mu">${x[0]} ${x[1]} · ${x[3]}</div></div>${I('chev')}</div>`).join(''):`<div class="mu">Nothing scheduled in ${r[0]}</div>`,`<span class="rg"><button data-a="rg" data-v="-1" aria-label="Previous">${I('left')}</button>${r[0]}<button data-a="rg" data-v="1" aria-label="Next">${I('chev')}</button></span>`)
++card('d','mon','My DSRs',`<label class="sx">${I('srch')}<input data-i="dq" placeholder="Search DSRs" value="${es(S.dq)}"></label><div id="gdl">${dsrL()}</div>`)
++card('s','share','My Shares',[['Globex pricing pack','4 docs · Lena Ortiz · Nov 19','12 views'],['Initech discovery recap','2 docs · Priya Nair · Nov 18','3 views']].map(x=>`<div class="li" data-a="ts" data-v="Share analytics open in the full product"><div class="tt"><div>${x[0]}</div><div class="mu">${x[1]}</div></div><span class="mu">${x[2]}</span></div>`).join(''))
++card('l','cap','My Learning',`<label class="sx">${I('srch')}<input data-i="lq" placeholder="Search courses" value="${es(S.lq)}"></label><div id="gll">${lrnL()}</div>`)}
+const dsrL=()=>DS.filter(x=>x[0].toLowerCase().includes(S.dq.toLowerCase())).map(x=>`<div class="li" data-a="gd" data-v="${x[2]}"><span class="sq">N</span><div class="tt"><div class="bl">${x[0]}</div><div class="mu">${x[1]}</div></div></div>`).join('')||'<div class="mu">No DSRs match.</div>';
+const lrnL=()=>LR.filter(x=>x[0].toLowerCase().includes(S.lq.toLowerCase())).map(x=>`<div class="li">${I('doc')}<div class="tt"><div>${x[0]}</div><div class="mu">${x[1]}/${x[2]} units</div></div><span class="mu">${Math.round(x[1]/x[2]*100)}%</span><button class="sm" data-a="ts" data-v="Course opens in the full product">${x[1]?'Resume':'Start'}</button></div>`).join('')||'<div class="mu">No courses match.</div>';
+const gen=(k,f)=>{const g=S.d+k;if(S.g[g]==2)return f();if(!S.g[g]){S.g[g]=1;setTimeout(()=>{S.g[g]=2;if((S.tab=='deal'||S.mp!=null)&&!S.ch)rBody()},1300)}return`<div class="gn">${I('spark','f')}Generating Content...</div>`};
+function deal(){const d=D[S.d];const hdr=`<div class="dh"><div class="drw"><button class="sel" data-a="dd"><b>${d?d.n:'Select a deal'}</b><span style="display:flex;gap:6px;color:var(--m)">${d?`<span data-a="dclr">${I('x')}</span>`:''}${I('down')}</span></button><button class="ib ${S.key?'on':''}" data-a="key" data-tip="Key deal">${I('crown')}</button><button class="ib cl" data-a="ts" data-v="Opens the opportunity in Salesforce" data-tip="Open in CRM">${I('cloud','f')}</button></div>${d?`<div class="chp">${pl(d.st)}${pl(d.am)}${pl(d.cl)}</div>`:''}${S.menu=='dd'?`<div class="pop" style="top:58px;bottom:auto">${Object.keys(D).map(k=>`<button class="${k==S.d?'on':''}" data-a="sd" data-v="${k}">${D[k].n}</button>`).join('')}</div>`:''}</div>`;
+if(!d)return hdr+`<div class="emp">${I('srch')}Pick a deal above, or open an email from a prospect and the deal loads on its own.</div>`;
+const x=d.dsr;return hdr+`<div class="cd ds"><div class="fr"><span class="sq">${d.co[0]}</span><div style="flex:1"><b>${x[0]}</b> ${pl('DSR','bb')}<div class="mu">${x[1]} · last activity ${x[2]}</div></div><button class="ic" data-a="ts" data-v="DSR link copied">${I('copy')}</button><button class="ic" data-a="ts" data-v="Opens the Digital Sales Room">${I('ext')}</button></div><div class="dst"><span>${I('eye')}${x[3]}</span><span>${I('users')}${x[4]}</span><span>${I('file')}${x[5]}</span><button class="sm" style="margin-left:auto" data-a="ts" data-v="Pick content to add to the DSR">${I('plus')}Add</button></div></div>`+SEC.map(([k,t])=>acc(k,t,d)).join('')}
+function acc(k,t,d){const op=S.o.has(k),ex=(GK.includes(k)||k=='ar')&&op?`<button class="gb" data-a="regen" data-v="${k}">${I('spark')}Generate</button>`:k=='sn'&&op?`<span class="vt"><button class="${S.grid?'':'on'}" data-a="grid" data-v="0">${I('lines')}</button><button class="${S.grid?'on':''}" data-a="grid" data-v="1">${I('grid')}</button></span>`:'';
+return`<div class="ac"><div class="ah" data-a="tg" data-v="${k}">${t}${ex}${I(op?'down':'chev')}</div>${op?`<div class="ab">${AIK.includes(k)?gen(k,()=>F[k](d)):F[k](d)}</div>`:''}</div>`}
+const addb=n=>`<button class="ad2b" data-a="radd" data-v="${n}">+Add</button>`;
+const RK={nd:(x,id,d)=>{const ci=S.o.has('ci'+id),as=S.o.has('as'+id),rs=S.o.has('rs'+id);return`<div class="it"><span class="ico">${I('bld')}</span><div class="tt"><b>${x[0]}</b></div>${st(x[1])}<button class="ic" data-a="tg" data-v="rs${id}" aria-label="Why recommended">${I('info')}</button></div>${rs?`<div class="rsn fi"><b>Reasons for recommendation</b>${ul(['Industry: '+x[2],'Products purchased: '+x[3],'Won against: '+d.cp])}</div>`:''}<div class="cib" data-a="tg" data-v="ci${id}">Customer Info${I(ci?'down':'chev')}</div>${ci?`<div class="cig fi">${[['Industry',x[2]],['Products',x[3]],['Health',pl(x[4],'lo')],['Customer since',x[5]],['Outcome',x[6]]].map(q=>`<div class="mu">${q[0]}</div><div>${q[1]}</div>`).join('')}</div>`:''}<div class="cib" data-a="tg" data-v="as${id}">Assets <span class="ok">${x[7].length}</span>${I(as?'down':'chev')}</div>${as?x[7].map(q=>`<div class="it">${ft(q[1])}<div class="tt">${q[0]}</div>${addb(q[0])}</div>`).join(''):''}`},
+as:x=>`<div class="it">${ft(x[1])}<div class="tt"><div>${x[0]}</div><div class="mu">${x[3]}</div></div>${st(x[2])}${addb(x[0])}</div>`,
+fq:(x,id)=>`<div class="fq" data-a="tg" data-v="fq${id}" style="cursor:pointer;margin-top:6px"><b>${x[0]}</b>${S.o.has('fq'+id)?`<div>${x[1]}</div>`:''}</div>`,
+gq:x=>`<div class="ck" style="cursor:default">${pl('Q','bb')}<span>${x}</span></div>`,
+co:x=>`<div class="it">${ft('vid')}<div class="tt"><div>${x[0]}</div><div class="mu">${x[1]} · bite-sized</div></div><button class="sm" data-a="ts" data-v="${x[0]} opens in the full product">Start</button></div>`,
+pe:(x,id)=>{const o=S.o.has('pe'+id);return`<div class="cib" data-a="tg" data-v="pe${id}">${x[0]}${I(o?'down':'chev')}</div>${o?`<div class="tpb fi"><b>Goals</b><p style="margin-top:2px">${x[1]}</p><b>What wins them over</b><p style="margin-top:2px">${x[2]}</p></div>`:''}`}};
+const ul=a=>'<ul>'+a.map(x=>`<li>${x}</li>`).join('')+'</ul>';
+const F={
+mt:d=>'<div class="lb">Past meetings</div>'+d.mt.map((m,i)=>{const mo=S.o.has('mt:m'+i),ao=S.o.has('mt:a'+i);return`<div class="mtg"><div><b>${m[0]}</b> <span class="mu">${m[1]}</span></div><div class="mr"><div class="th">${I('play')}<span>${m[3]}</span></div><div><div><b>${m[2]}</b></div><div class="mav">${parseInt(m[3])}m <i>${ini(d.ppl[d.pc][0])}</i><i>MT</i>${pl(m[4],'g')}</div></div></div><p class="mss ${mo?'':'cl3'}">${m[5]}</p>${mo?'':`<button class="lk" data-a="tg" data-v="mt:m${i}">More</button>`}<div class="aib" data-a="tg" data-v="mt:a${i}">Action items ${pl(m[6].length,'g')}${I(ao?'down':'chev')}</div>${ao?ul(m[6]):''}</div>`}).join(''),
+ar:d=>[['fi','Company Firmographics'],['il','Industry Landscape'],['ch','Sales and Revenue Enablement Challenges'],['pm','People Map / Hierarchy']].map(([k,t])=>{const op=S.o.has('ar:'+k);return`<div class="srw" data-a="tg" data-v="ar:${k}">${I(op?'down':'chev')}${t}<span class="in">${I('info')}</span></div>${op?`<div class="md" style="padding:0 0 10px 22px">${gen(k,()=>F[k](d))}</div>`:''}`}).join(''),
+su:d=>`<div class="md"><p>${d.sum}</p><h4>Next step</h4><p>${d.nx[0]}.</p></div>`,
+fu:d=>d.nx.map((n,i)=>{const k=S.d+i,on=S.done.has(k);return`<div class="ck ${on?'on':''}" data-a="dn" data-v="${k}"><i>${on?I('chk'):''}</i><span>${n}</span></div>`}).join(''),
+sn:d=>`<div class="sng ${S.grid?'g':''}">`+[['Opportunity > Products',d.pr],['Opportunity > Competitors',d.cp],['Opportunity > Integration',d.ig],['Stage Name',d.st],['Amount',d.af],['Close Date',d.cl],['Owner','Matthew Torres']].map(r=>S.grid?`<div><div class="mu">${r[0]}</div>${r[1]}</div>`:`<div class="k">${r[0]}</div><div>${r[1]}</div>`).join('')+'</div>',
+rc:d=>RC.map(([n,k,it],i)=>{const op=S.o.has('rc:'+i);return`<div class="rcr ${op?'on':''}" data-a="tg" data-v="rc:${i}">${I(op?'down':'chev')}${n}: <span class="cnt">${it.length}</span></div>${op?`<div class="rci">${it.map((x,j)=>RK[k](x,i+'.'+j,d)).join('')}</div>`:''}`}).join(''),
+cpl:d=>`<div class="md"><h4>Objective</h4><p>${d.nx[0]}.</p><h4>Agenda</h4>${ul(['Recap what changed since the last call','Review open action items','Handle the '+d.cp+' comparison','Agree on the next step and owner'])}<h4>Desired outcome</h4><p>A dated next step before ${d.cl.split(',')[0]}.</p></div>`,
+dp:d=>{const s=['Discovery','Qualification','Evaluation','Negotiation','Closed'],i=s.indexOf(d.st);return`<div class="dpg">${s.map((x,j)=>`<span class="${j<=i?'on':''}"></span>`).join('')}</div><div class="mu">${d.st}, stage ${i+1} of 5 · ${d.af} · closes ${d.cl}</div>`},
+ac2:d=>{const c=d.ppl[d.pc][0],eb=d.ppl.find(p=>p[3]=='Economic buyer')[0];return[['Email from '+c,'2h ago'],['Meeting: '+d.mt[0][2],d.mt[0][1]],[`DSR viewed ${d.dsr[3]} times`,d.dsr[2]],['Proposal opened by '+eb,'yesterday']].map(x=>`<div class="avt"><i></i><div><div>${x[0]}</div><div class="mu">${x[1]}</div></div></div>`).join('')},
+rk:d=>d.rk.map(r=>`<div class="ck" style="cursor:default">${pl({hi:'High',md:'Medium',lo:'Low'}[r[0]],r[0])}<span>${r[1]}</span></div>`).join(''),
+sh:d=>{const all=S.o.has('sh:all'),L=all?d.ppl:d.ppl.slice(0,3);return L.map(p=>`<div class="pp"><span class="av">${p[0][0]}</span><div><b>${p[0]}</b> <span class="ad">${I('uadd')}</span><div class="mu">${p[1]} ${I('mail')}</div></div><div class="ppm"><span>${I('cal')}${p[4]}</span><span>${I('share')}${p[5]}</span></div></div>`).join('')+(d.ppl.length>3?`<button class="lk" data-a="tg" data-v="sh:all">${all?'Show less':`Show ${d.ppl.length-3} more`}</button>`:'')},
+fi:d=>`<div class="md"><h3>Company Firmographics: ${d.co}</h3><h4>Company Name</h4><ul><li><b>Legal Name:</b> ${d.co}, Inc.</li><li><b>Website:</b> <a>${d.dom}</a></li><li><b>Founded:</b> ${d.fd}</li><li><b>Headquarters:</b> ${d.hq}</li><li><b>Business Model:</b> B2B</li><li><b>Company Type:</b> Privately held</li></ul><h4>Number of Employees</h4><p>${d.co} has about <b>${d.emp} employees</b> based on public profiles and CRM records.</p><h4>Industry</h4><p>${d.co} operates in <b>${d.ind}</b>.</p><h4>Leadership</h4><table><tr><th>Name</th><th>Title</th></tr>${d.ppl.slice(0,4).map(p=>`<tr><td><b>${p[0]}</b></td><td>${p[1]}</td></tr>`).join('')}</table></div>`,
+il:d=>`<div class="md"><h3>${d.co}: Industry Landscape</h3><p><b>Industry:</b> ${d.ind} | <b>HQ:</b> ${d.hq}</p><h4>What is shifting</h4>${ul(d.tr)}<h4>Competitive context</h4><p>The main alternative in this deal is <b>${d.cp}</b>.</p></div>`,
+ch:d=>`<div class="md"><h3>Account Research Report: ${d.co}</h3><h4>Enablement challenges</h4><table><tr><th>Challenge</th><th>Revenue lever</th></tr>${d.pn.map(p=>`<tr><td>${p[0]}</td><td>${LV[p[1]]}</td></tr>`).join('')}</table></div>`,
+sp:d=>`<div class="mu" style="margin-bottom:4px">Suggested for ${d.co}</div>`+[2,0,13].map((i,j)=>{const on=S.sp.has(j);return`<div class="ck" data-a="spk" data-v="${j}"><i style="${on?'background:var(--b);border-color:var(--b)':''}">${on?I('chk'):''}</i>${ft(A[i][1])}<span>${A[i][0]}</span></div>`}).join('')+`<button class="bt" style="margin-top:8px" data-a="spl">${I('share')}Create share link</button>`,
+pm:d=>`<div class="md"><h3>People Map: ${d.co}</h3></div>`+[...d.ppl].sort((a,b)=>a[2]-b[2]).map(p=>`<div class="tre" style="margin-left:${p[2]*16}px"><b>${p[0]}</b> ${pl(p[3],p[3]=='Champion'?'lo':p[3].includes('blocker')?'hi':'g')}<div class="mu">${p[1]}</div></div>`).join('')};
+function content(){let h=`<div style="position:relative" class="csw"><label class="sx" style="margin:0;padding:8px 10px">${I('srch')}<input data-i="cq" placeholder="Search" value="${es(S.cq)}">${I('sld')}</label><div id="csd">${S.cf?csd():''}</div></div>`;
+if(!S.cp.length)return h+`<div class="cd" style="padding:6px 10px">${[['Favorites','star'],['My Folder','fold'],['FAQs','info'],['Library','lib'],['Views','eye'],['Shared With Me','users'],['Workspace','bld']].map(([n,i])=>`<div class="li" data-a="cp" data-v="${n}">${I(i)}<div class="tt">${n}</div></div>`).join('')}</div><div class="cd"><div class="li" style="padding:12px 14px" data-a="cp" data-v="Templates">${I('lines')}<div class="tt">Templates</div>${pl(TP.length,'g')}</div></div>`;
+if(S.cp[0]=='Templates')return h+tpv();
+let node=S.cp[0]=='FAQs'?0:S.cp.reduce((n,k)=>n[k],TREE);
+h+=`<div class="cd"><div class="bc"><button data-a="cp" data-v="">Content</button>${S.cp.map((c,i)=>` &gt; <button data-a="cpi" data-v="${i}">${c}</button>`).join('')}</div><div style="padding:6px 12px 12px">`;
+if(!node)return h+FQ.map((f,i)=>`<div class="fq"><b>${f[0]}</b><div>${f[1]}</div>${pl('FAQ','g')}<button class="ad2" data-a="fqa" data-v="${i}">+Add</button></div>`).join('')+'</div></div>';
+if(Array.isArray(node))return h+`<label class="sx">${I('srch')}<input data-i="fq" placeholder="Search folders / files" value="${es(S.fq)}"></label><div id="gfl">${fl(node)}</div></div></div>`;
+return h+Object.keys(node).map(k=>`<div class="li" data-a="cpd" data-v="${k}">${I('fold')}<div class="tt">${k}</div>${I('chev')}</div>`).join('')+'</div></div>'}
+const ft=t=>`<span class="ft ${t}">${{pdf:'PDF',vid:'▶',pg:'GB',doc:'DOC'}[t]}</span>`;
+const arow=i=>`<div class="li cfl" data-a="ts" data-v="Opening ${A[i][0]}">${ft(A[i][1])}<div class="tt"><div>${A[i][0]}</div></div><span class="mu">${I('fold')}${A[i][2]}</span></div>`;
+const fl=n=>{const r=n.filter(i=>A[i][0].toLowerCase().includes(S.fq.toLowerCase()));return r.length?r.map(arow).join(''):`<div class="emp">${I('fold')}No data found</div>`};
+const fil=s=>{const m=S.v=='mail'&&S.mo!=null?M[S.mo]:0,dd=D[S.d],fn=S.cm&&/^[a-z]/i.test(S.cm.to)?cap(S.cm.to.split(/[@.]/)[0]):m&&m[4]?m[0].split(' ')[0]:'there';return s.replace(/\{f\}/g,fn).replace(/\{co\}/g,dd?dd.co:'your team')};
+const tpL=()=>{const q=S.tq.toLowerCase(),r=TP.map((t,i)=>[t,i]).filter(([t])=>(t[1]=='m'?S.tmy:S.ttm)&&t[0].toLowerCase().includes(q));return r.length?r.map(([t,i])=>`<button class="tr2" data-a="tx2" data-v="${i}">${t[0]}${I(S.te==i?'down':'chev')}</button>${S.te==i?`<div class="tpb fi"><div class="mu">Subject</div><b>${fil(t[2])}</b><p>${es(fil(t[3]))}</p><div class="acr"><button class="bt" data-a="tins" data-v="${i}">${I('reply')}Insert into reply</button><button class="bt2" data-a="ts" data-v="Template copied">${I('copy')}Copy</button></div></div>`:''}`).join(''):`<div class="emp">${I('lines')}No templates match.</div>`};
+const tpv=()=>`<div class="cd"><div class="bc"><button data-a="cp" data-v="">Content</button> &gt; <b style="color:var(--t);font-weight:500">Templates</b><button style="margin-left:auto;color:var(--t)" data-a="ts" data-v="The template editor opens in the full product">${I('plus')}Add new</button></div><div style="padding:6px 12px 12px"><label class="sx">${I('srch')}<input data-i="tq" placeholder="Search templates..." value="${es(S.tq)}"></label><div class="tck">${[['m','My Templates',S.tmy],['t','Team Templates',S.ttm]].map(x=>`<button data-a="tf" data-v="${x[0]}"><i class="${x[2]?'on':''}">${x[2]?I('chk'):''}</i>${x[1]}</button>`).join('')}</div><div id="gtl">${tpL()}</div></div></div>`;
+function csd(){const q=S.cq.toLowerCase(),r=A.map((a,i)=>i).filter(i=>!q||(A[i][0]+A[i][2]).toLowerCase().includes(q));const c={};r.forEach(i=>c[A[i][2]]=(c[A[i][2]]||0)+1);
+return`<div class="csd">${q?`<div class="chs">${Object.entries(c).map(([k,v])=>`<span>${k} (${v})</span>`).join('')}</div>`:`<div class="li cfl">${I('hist')}<div class="tt">pricing proposal</div></div>`}${r.length?r.map(arow).join(''):`<div class="emp">No results for "${es(S.cq)}"</div>`}</div>`}
+function rCmp(){const d=D[S.d],m=S.menu;let pop='';
+if(m=='plus'||m&&m.startsWith('sub:'))pop=`<div class="pop">${[['prompts','spark','Prompts'],['skills','bolt','Skills'],['conn','plug','Connectors']].map(([k,i,t])=>`<button class="${m=='sub:'+k?'on':''}" data-a="sub" data-v="${k}">${I(i)}${t}<span class="ar">${I('chev')}</span></button>`).join('')}<div class="sp"></div><button data-a="gc">${LG}GTM Buddy Content</button><button data-a="calls">${I('play')}Calls</button><button data-a="ts" data-v="File upload works in the full product">${I('clip')}Upload file</button></div>`+(m=='sub:prompts'?`<div class="pop s2">${PR.map(p=>`<button data-a="pr" data-v="${p[0]}">${I('wand')}${p[0]}<span class="ag">${p[1]} arg${p[1]>1?'s':''}</span></button>`).join('')}</div>`:m=='sub:skills'?`<div class="pop s2">${SK.map(s=>`<button data-a="pr" data-v="/${s}">${I('bolt')}${s}</button>`).join('')}</div>`:m=='sub:conn'?`<div class="pop s2">${['Salesforce','Gmail','Slack','Zoom','Google Drive'].map(c=>`<button data-a="cn" data-v="${c}">${I('plug')}${c}<span class="ag" style="${S.cn.has(c)?'background:#e7f6ec;color:#067647':''}">${S.cn.has(c)?'Connected':'Connect'}</span></button>`).join('')}</div>`:'');
+if(m=='lang')pop=`<div class="pop rt">${LN.map(l=>`<button class="${l==S.lang?'on':''}" data-a="lang" data-v="${l}">${l}</button>`).join('')}</div>`;
+if(m=='hist')pop=`<div class="pop">${['Battlecard','Summarize this deal','Discovery Guide'].map(h=>`<button data-a="pr" data-v="${h}">${I('hist')}${h}</button>`).join('')}</div>`;
+$('.cwr').innerHTML=pop+`<div class="cmp">${d?`<span class="mn">@${d.n}</span>`:''}<textarea data-i="tx" placeholder="Ask Nucleus anything, or type / for prompts">${es(S.tx)}</textarea><div class="crw"><button class="ic" data-a="plus" aria-label="Add">${I('plus')}</button><button class="ic" data-a="hist" aria-label="History">${I('hist')}</button><button class="pb" style="margin-left:auto" data-a="cc" data-tip="Switch to ${S.cc?'detailed':'concise'} responses">${I('lines')}${S.cc?'Concise':'Detailed'}</button><button class="pb" data-a="lmenu">${I('globe')}${S.lang}${I('down')}</button><button class="snd" data-a="send" aria-label="Send">${I('send')}</button></div></div>`}
+function chat(){return`<div class="cht"><button class="ic" data-a="back2" aria-label="Back">${I('left')}</button><span>${es(S.ch.t)}</span><button class="ic" data-a="newc" data-tip="New chat">${I('plus')}</button></div>`+S.ch.m.map(m=>m.u?`<div class="um fi">${es(m.u)}</div>`:`<div class="am">${LG}<div><div class="nl2">Nucleus</div>${m.steps.slice(0,m.k).map((s,i)=>`<div class="stp ${i==m.k-1&&!m.n?'ld':''}">${I(i==m.k-1&&!m.n?'spark':'chk',i==m.k-1&&!m.n?'f':'')}${s}</div>`).join('')}<div class="md">${m.b.slice(0,m.n).map(b=>`<div class="fi">${b}</div>`).join('')}</div></div></div>`).join('')}
+const INT=[['rp',/role play|practice|rehears/i],['fu',/follow|recap|email/i],['bc',/battle|compet|stratus|objection/i],['rk',/risk/i],['dg',/discover|question|prep/i],['su',/summar|status|review|exec|where/i],['tt',/talk track|pitch/i],['cs',/case stud|proof|stor/i],['pg',/persona/i],['rs',/rep skill|training|coach|analyze/i]];
+function resp(q){const d=D[S.d]||D.globex,k=(INT.find(x=>x[1].test(q))||['fb'])[0],c=d.ppl[d.pc],f=c[0].split(' ')[0],m=d.mt[0],eb=d.ppl.find(p=>p[3]=='Economic buyer');let b=[];
+if(!D[S.d]&&k!='fb')b.push('<p class="mu">Tip: pick a deal so answers use its context. Showing Globex as an example.</p>');
+if(S.lang!='English')b.push(`<p class="mu">This preview answers in English. The full product replies in ${S.lang}.</p>`);
+const T={rp:()=>{const t=S.mp!=null?EV[S.mp][4]:m[2];return[`<p>Role play ready for <b>${t}</b>. You will practice with an AI buyer modeled on <b>${eb[0]}</b>, ${eb[1]}, built from ${d.mt.length} recorded call${d.mt.length>1?'s':''}.</p>`,`<div class="em"><div class="es">AI buyer opens with</div>"${d.pn[0][0]}. Why should we move forward with you instead of ${d.cp}?"</div>`,`<h4>You are scored on</h4>${ul(['Linking value to their top challenge','Handling the '+d.cp+' comparison','Closing on a next step before '+d.cl.split(',')[0]])}`,`<div class="acr"><button class="bt" data-a="ts" data-v="Voice role play runs in the full product">${I('play')}Start voice session</button><button class="bt2" data-a="ts" data-v="Text role play runs in the full product">Practice in text</button></div>`]},
+fu:()=>{S.dr=`Hi ${f},\n\nThanks for the time on ${m[1]}. Quick recap of what we agreed:\n${m[6].map(x=>'- '+x).join('\n')}\n\nI will send the first item by Friday. Does a 20 minute check-in next week work for you?\n\nBest,\nMatthew`;return[`<p>Here is a follow-up for ${f} after <b>${m[2]}</b>. I used the action items from the call and the open steps on the deal.</p>`,`<div class="em"><div class="es">Subject: <b>Next steps from our ${m[2].split(' - ')[0].toLowerCase()}</b></div>${es(S.dr).replace(/\n/g,'<br>')}</div>`,`<div class="acr"><button class="bt" data-a="ins">${I('reply')}Insert into ${S.cm?'email':'reply'}</button><button class="bt2" data-a="ts" data-v="Draft copied">${I('copy')}Copy</button></div>`]},
+bc:()=>[`<p>Battlecard for <b>${d.co}</b> against <b>Stratus Data</b>.</p>`,'<table><tr><th>Topic</th><th>Northstar</th><th>Stratus Data</th></tr><tr><td>Deployment</td><td>Managed cloud</td><td>Mostly self-hosted</td></tr><tr><td>Governance</td><td>Built in</td><td>Paid add-on</td></tr><tr><td>Pricing</td><td>Usage based with caps</td><td>Per node licensing</td></tr><tr><td>Support</td><td>Named CSM from day one</td><td>Tiered support</td></tr></table>',`<h4>Landmines to set</h4>${ul(['Ask who will maintain the servers after year one','Ask how lineage is reported to auditors today','Ask what the add-on modules cost at full scale'])}`,`<p><b>Where they win:</b> teams that must run fully on-premise. Confirm early that ${d.co} is cloud-ready.</p>`],
+rk:()=>[`<p>${d.rk.length} risks on <b>${d.n}</b>:</p>`,d.rk.map(r=>`<div class="ck" style="cursor:default">${pl({hi:'High',md:'Medium',lo:'Low'}[r[0]],r[0])}<span>${r[1]}</span></div>`).join(''),`<p><b>Suggested move:</b> ${d.nx[d.nx.length-1]}, and ask ${f} to co-host the next meeting with ${eb[0]}.</p>`],
+dg:()=>[`<p>Discovery guide for <b>${d.co}</b> in ${d.ind.toLowerCase()}:</p>`,'<ul>'+[`What changed in the last two quarters that made this a priority?`,`How does ${d.pn[0][0].toLowerCase()} show up in your numbers?`,`Who besides you would sign off, and what would ${eb[0].split(' ')[0]} need to see?`,`What have you tried already, and why did it stall?`,`If we solved this, what would be true by ${d.cl.split(',')[0]}?`].map(x=>`<li>${x}</li>`).join('')+'</ul>',`<p class="mu">Based on ${d.mt.length} recorded call${d.mt.length>1?'s':''} and the ${d.ind} sales play.</p>`],
+su:()=>[`<p><b>${d.n}</b></p>`,`<table><tr><td>Stage</td><td>${d.st}</td></tr><tr><td>Amount</td><td>${d.af}</td></tr><tr><td>Close date</td><td>${d.cl}</td></tr><tr><td>Champion</td><td>${d.ppl.find(p=>p[3]=='Champion')[0]}</td></tr></table>`,`<p>${d.sum}</p>`,`<p><b>Next:</b> ${d.nx[0]}.</p>`],
+tt:()=>{S.dr=`Hi ${f},\n\nTeams like yours tell us ${d.pn[0][0].toLowerCase()}. Northstar builds governance in from day one, so new data and AI features ship without extra review cycles.\n\nFabrikam rolled this out across four regions without slowing pipeline. Worth a 20 minute look next week?\n\nBest,\nMatthew`;return[`<p>Talk track for ${eb[0]}, ${eb[1]}:</p>`,`<h4>Open</h4><p>"${f} mentioned ${d.pn[0][0].toLowerCase()}. How much is that costing your team this quarter?"</p>`,`<h4>Bridge</h4><p>"Teams like Fabrikam fixed that by putting the right content and coaching inside the tools reps already use."</p>`,`<h4>Ask</h4><p>"Would you join a 30 minute session with ${f} to agree on what success looks like by ${d.cl.split(',')[0]}?"</p>`,`<div class="em"><div class="es">Email draft</div>${es(S.dr).replace(/\n/g,'<br>')}</div>`,`<div class="acr"><button class="bt" data-a="ins">${I('reply')}Insert into ${S.cm?'email':'reply'}</button></div>`]},
+cs:()=>[`<p>Best proof points for <b>${d.co}</b>:</p>`,[2,3].map(i=>`<div class="ce">${ft(A[i][1])}<div style="flex:1"><b>${A[i][0]}</b><div class="mu">Similar size and buying committee</div></div><button class="bt2" data-a="ts" data-v="${A[i][0]} added to the ${d.co} DSR">Add to DSR</button></div>`).join('')],
+pg:()=>[`<p>Persona guide for <b>${eb[0]}</b>, ${eb[1]} at ${d.co}.</p>`,`<h4>Cares about</h4>${ul(['Pipeline coverage and forecast accuracy','Time to productivity for new hires','Proof before expanding spend'])}`,`<h4>Avoid</h4>${ul(['Feature tours','Vague ROI claims without their own data'])}`],
+rs:()=>[`<p>Skill review from <b>${m[2]}</b>:</p>`,'<table><tr><th>Skill</th><th>Score</th></tr><tr><td>Discovery depth</td><td>4 / 5</td></tr><tr><td>Objection handling</td><td>3 / 5</td></tr><tr><td>Next step clarity</td><td>5 / 5</td></tr></table>','<p>Pricing pushback was answered with a discount instead of value.</p>',`<div class="acr"><button class="bt" data-a="ts" data-v="Pricing Objection Practice assigned">Assign Pricing Objection Practice</button></div>`],
+fb:()=>[`<p>This is an interactive preview with sample data, so it answers a set of sample questions. In the full product, Nucleus answers from your CRM, calls, emails, and content.</p>`,`<div class="acr">${['Draft Meeting Follow-Up','Battlecard','What are the deal risks?'].map(s=>`<button class="sgc" data-a="pr" data-v="${s}">${s}</button>`).join('')}</div>`,`<div class="acr"><a class="bt" href="${DEMO}" target="_blank" rel="noopener">See it with your data</a></div>`]};
+b=b.concat(T[k]());if(k!='fb'&&k!='rp')b.push(`<div class="src"><b>Sources</b>${[A[2][0],A[4][0],'Salesforce: '+d.n].join(' · ')}</div>`);if(!S.cc&&k!='fb')b.push(`<p class="why"><b>Why this matters:</b> ${d.co} is in ${d.st.toLowerCase()}. This answer draws on ${d.mt.length} call${d.mt.length>1?'s':''}, CRM fields, and approved content, so the rep can act without leaving the inbox.</p>`);
+return{steps:k=='fb'?['Checking what this preview covers']:k=='rp'?[`Loading ${d.co} calls`,'Building the AI buyer','Setting up the scenario']:[`Reading ${d.co} deal`,'Checking calls, emails, and CRM','Writing answer'],b,k:0,n:0}}
+async function send(q){q=q.trim();if(!q)return;S.menu=null;S.tx='';if(!S.ch)S.ch={t:q,m:[]};const r=resp(q);S.ch.m.push({u:q},r);rPanel();
+for(let i=1;i<=r.steps.length;i++){r.k=i;rBody();await W(520)}for(let i=1;i<=r.b.length;i++){r.n=i;rBody();await W(260)}r.done=1}
+const act={
+noop(){},app(v){S.v=v;S.ep=null;rMain()},ev(v,t,e){e.stopPropagation();S.ep=S.ep==+v?null:+v;S.epa=1;rCal()},epx(){S.ep=null;rCal()},
+prep(){const e=EV[S.ep];S.rv=0;S.ctx=0;S.o.add('rc');S.mp=S.ep;S.ep=null;S.d=e[5];S.ch=null;S.po=1;S.menu=null;rPanel();rCal();toast('Meeting prep loaded: '+e[4])},
+mpx(){S.mp=null;rPanel()},prac(){send('Practice role play: '+EV[S.mp][4])},rsvp(v){S.rs[S.ep]=v;rCal()},addc(v){S.ctc.add(v);rCal();toast(v+' added as a CRM contact')},
+cw(v){S.ep=null;const n=v=='t'?1:S.wk+ +v;if(n<0||n>2)toast('Sample data covers Nov 15 to Dec 5');S.wk=Math.max(0,Math.min(2,n));rCal()},
+md(v){v=+v;if(v<15)return toast('Sample data covers Nov 15 to Dec 5');S.ep=null;S.wk=Math.floor((v-15)/7);rCal()},
+spk(v){v=+v;S.sp.has(v)?S.sp.delete(v):S.sp.add(v);rBody()},spl(){toast(S.sp.size?`Share link copied: ${S.sp.size} asset${S.sp.size>1?'s':''}, view tracking on`:'Pick at least one asset')},tour(v){S.tour?stop():tour(v)},close(){S.po=0;rPanel()},pt(){S.po=!S.po;rPanel()},
+mf(v){S.mf=v;S.mo=null;rNav();rList()},
+om(v){v=+v;S.mo=v;S.rd.add(v);S.rp=0;const k=M[v][4];if(k)S.d=k;rAll()},
+mprep(){openDeal(M[S.mo][4])},
+cmp(){S.cm={to:'',sub:'',body:'',lk:[],d:null};S.cpo=null;S.cma=1;rCm()},cmx(){S.cm=null;S.cpo=null;rCm()},
+cdd(){S.cpo=S.cpo=='deal'?null:'deal';rBar()},ctp(){S.cpo=S.cpo=='tpl'?null:'tpl';rBar()},
+cds(v){S.cm.d=v;S.d=v;S.cpo=null;rBar();rCmp()},cti(v){S.cpo=null;act.tins(v)},
+cmprep(){S.cm.d?openDeal(S.cm.d):toast('Add a recipient so GTM Buddy can find the deal')},
+crc(){S.rv=1;S.rf='All';S.rr=null;S.ch=null;S.mp=null;S.po=1;rPanel()},rvx(){S.rv=0;rPanel()},rf(v){S.rf=v;rBody()},rsn(v){v=+v;S.rr=S.rr==v?null:v;rBody()},
+radd(v){const r=putL(v);toast(r?v+' added to your '+r:v+' added to your share list')},ctx(){S.ctx=!S.ctx;rBody()},
+csend(){if(!S.cm.to)return toast('Add a recipient first');const n=cap(S.cm.to.split(/[@.]/)[0]);S.cm=null;S.cpo=null;rCm();toast('Sent. You will get a Slack alert when '+n+' opens it')},
+vo(){if(!SY)return toast('Voice is not supported in this browser');VO=!VO;trL();if(!VO)SY.cancel();else{const g=$('.gt.on');g&&say(g.querySelector('h5').textContent+'. '+g.querySelector('p').textContent)}},
+tf(v){v=='m'?S.tmy=!S.tmy:S.ttm=!S.ttm;rBody()},tx2(v){v=+v;S.te=S.te==v?null:v;$('#gtl').innerHTML=tpL()},
+tins(v){const t=TP[+v],r=putT(fil(t[3]));if(r=='email'&&!S.cm.sub){S.cm.sub=fil(t[2]);rCm()}toast(r?'Template inserted into your '+r:'Open or write an email to insert a template')},
+star(v,t,e){e.stopPropagation();v=+v;S.star.has(v)?S.star.delete(v):S.star.add(v);rList()},
+back(){S.mo=null;rList()},rp(){S.rp=1;rList();$('.ls').scrollTop=1e4;$('.rpl textarea').focus({preventScroll:1})},
+sendm(){S.rp=0;S.rt='';rList();toast('Reply sent (demo)')},
+tab(v){S.tab=v;S.ch=null;S.mp=null;S.rv=0;S.cp=[];S.cf=0;rPanel()},
+hc(v){S.hc.has(v)?S.hc.delete(v):S.hc.add(v);rBody()},
+rg(v,t,e){e.stopPropagation();S.rg=Math.max(0,Math.min(2,S.rg+ +v));rBody()},
+gd(v){S.d=v;S.mp=null;S.tab='deal';S.o.add('mt');rPanel();toast('Opened '+D[v].n)},
+tg(v){S.o.has(v)?S.o.delete(v):S.o.add(v);rBody()},
+regen(v,t,e){e.stopPropagation();(v=='ar'?(S.o.add('ar:fi'),['fi','il','ch','pm']):[v]).forEach(x=>S.g[S.d+x]=0);rBody()},
+grid(v,t,e){e.stopPropagation();S.grid=+v;rBody()},
+dn(v){S.done.has(v)?S.done.delete(v):S.done.add(v);rBody()},
+dd(){S.menu=S.menu=='dd'?null:'dd';rBody()},
+dclr(v,t,e){e.stopPropagation();S.d=null;S.menu=null;rPanel()},
+sd(v){S.d=v;S.menu=null;rPanel()},
+key(){S.key=!S.key;rBody();toast(S.key?'Marked as key deal':'Removed from key deals')},
+ts(v){toast(v)},
+cp(v){S.cp=v?[v]:[];S.fq='';rBody()},cpi(v){S.cp=S.cp.slice(0,+v+1);S.fq='';rBody()},cpd(v){S.cp.push(v);S.fq='';rBody()},
+fqa(v){const r=putT(FQ[v][1],1);toast(r?'Answer added to your '+r:'Open or write an email to add this answer')},
+plus(){S.menu=S.menu?null:'plus';rCmp()},sub(v){S.menu='sub:'+v;rCmp()},
+hist(){S.menu=S.menu=='hist'?null:'hist';rCmp()},lmenu(){S.menu=S.menu=='lang'?null:'lang';rCmp()},
+lang(v){S.lang=v;S.menu=null;rCmp()},cc(){S.cc=!S.cc;rCmp()},
+cn(v){S.cn.has(v)?S.cn.delete(v):S.cn.add(v);rCmp()},
+gc(){S.menu=null;S.ch=null;S.mp=null;S.tab='content';rPanel()},calls(){S.menu=null;S.ch=null;S.mp=null;S.tab='deal';S.o.add('mt');rPanel()},
+pr(v){send(v)},send(){send(S.tx)},
+back2(){S.ch=null;rPanel()},newc(){S.ch=null;rPanel();$('textarea[data-i=tx]').focus()},
+ins(){{const r=putT(S.dr);if(r)return toast('Draft inserted into your '+r)}const k=S.d||'globex';if(S.v!='mail'){S.v='mail';S.ep=null;rMain()}if(S.mo==null||M[S.mo][4]!=k){const i=M.findIndex(m=>m[4]==k);S.mo=i;S.rd.add(i)}S.rp=1;S.rt=S.dr;rList();$('.ls').scrollTop=1e4;toast('Draft inserted into your reply')}};
+R.addEventListener('click',e=>{const gb=e.target.closest('[data-g]');if(gb){gb.dataset.g=='n'?gN&&gN():stop();return}const t=e.target.closest('[data-a]'),a=t&&t.dataset.a;
+if(S.ep!=null&&S.v=='cal'&&e.target.closest('.cbx')&&!e.target.closest('.ep,[data-a="ev"]')){S.ep=null;rCal()}
+if(S.menu&&!['plus','sub','lmenu','hist','dd','cn'].includes(a)&&!e.target.closest('.pop')){const m=S.menu;S.menu=null;m=='dd'?rBody():rCmp()}
+if(S.cpo&&!e.target.closest('.cpp')&&!['cdd','ctp'].includes(a)){S.cpo=null;rBar()}
+if(S.cf&&!e.target.closest('.csw')){S.cf=0;const c=$('#csd');c&&(c.innerHTML='')}
+if(a&&act[a])act[a](t.dataset.v,t,e)});
+const IN={ctq:()=>$('#ctl').innerHTML=ctl(),tq:()=>$('#gtl').innerHTML=tpL(),mq:rList,dq:()=>$('#gdl').innerHTML=dsrL(),lq:()=>$('#gll').innerHTML=lrnL(),cq:()=>$('#csd').innerHTML=csd(),fq:()=>{const n=S.cp.reduce((n,k)=>n[k],TREE);$('#gfl').innerHTML=fl(n)}};
+const CK={cto:'to',csb:'sub',cbd:'body'};
+R.addEventListener('input',e=>{const k=e.target.dataset.i;if(!k)return;if(CK[k]){S.cm[CK[k]]=e.target.value;k=='cto'&&cmap();return}S[k]=e.target.value;IN[k]&&IN[k]()});
+R.addEventListener('focusin',e=>{if(e.target.dataset.i=='cq'){S.cf=1;$('#csd').innerHTML=csd()}});
+R.addEventListener('keydown',e=>{if(e.key=='Enter'&&!e.shiftKey&&e.target.dataset.i=='tx'){e.preventDefault();send(S.tx)}});
+let run=0,gN=null,TN=0,TL='',TPR='',VO=0;const SY=window.speechSynthesis;SY&&SY.getVoices();
+const vce=()=>{const L=SY.getVoices();return L.find(v=>/^en/.test(v.lang)&&/Natural|Google US English|Samantha|Aria|Jenny/.test(v.name))||L.find(v=>/^en-US/.test(v.lang))||L.find(v=>/^en/.test(v.lang))};
+const say=t=>new Promise(r=>{if(!VO||!SY)return r();SY.cancel();const u=new SpeechSynthesisUtterance(t),v=vce();v&&(u.voice=v);u.rate=1.02;const k=setTimeout(r,t.length*85+2500);u.onend=u.onerror=()=>{clearTimeout(k);r()};SY.speak(u)});
+const gHide=()=>{$('.gt').className='gt';R.querySelectorAll('.hlt').forEach(x=>x.classList.remove('hlt'))};
+const gtip=(el,n,t,x,ms=2800,sd)=>new Promise(res=>{const g=$('.gt'),w=$('.w').getBoundingClientRect();g.innerHTML=`<span class="gs">${n?`${TL} · Step ${n} of ${TN}`:'All set'}</span><h5>${t}</h5><p>${x}</p><div class="gf"><span class="gbar"><i></i></span><button class="gk" data-g="s">Skip tour</button><button class="gn2" data-g="n">${n?'Next':'Explore'}</button></div>`;g.className='gt';const h=g.offsetHeight,gw=g.offsetWidth;let L,T,c='';
+if(el){el.classList.add('hlt');const r=el.getBoundingClientRect(),cx=r.left-w.left+Math.min(r.width/2,70);L=r.left-w.left-gw-16;if(sd=='l'&&L>=10){T=Math.max(8,Math.min(r.top-w.top-8,w.height-h-8));c='lt';g.style.setProperty('--ay',Math.max(12,Math.min(h-20,r.top-w.top+Math.min(r.height,40)/2-T-5))+'px')}else{L=Math.max(10,Math.min(w.width-gw-10,cx-34));T=r.bottom-w.top+12;if(T+h>w.height-8){T=Math.max(8,r.top-w.top-h-12);c='up'}g.style.setProperty('--ax',Math.max(14,Math.min(gw-24,cx-L-5))+'px')}}else{L=(w.width-gw)/2;T=(w.height-h)/2;c='nx'}
+g.style.left=L+'px';g.style.top=T+'px';requestAnimationFrame(()=>{g.className='gt on '+c;const b=g.querySelector('.gbar i');b.style.transition=`width ${ms}ms linear`;b.style.width='100%'});let d=0;const f=()=>{if(!d){d=1;gN=null;res()}};gN=()=>{SY&&SY.cancel();f()};Promise.all([W(ms),say(t+'. '+x)]).then(f)});
+function stop(){run++;S.tour=0;SY&&SY.cancel();$('.fc').style.opacity=0;gHide();trL()}
+async function tour(which='all'){const id=++run;init();S.tour=1;rAll();const c=$('.fc'),w=$('.w');c.style.opacity=1;const ok=()=>{if(id!=run)throw 0};
+const tp=s=>{const e=$(s),b=$('.bd');e&&(b.scrollTop+=e.getBoundingClientRect().top-b.getBoundingClientRect().top-8)};
+const wait=async()=>{for(let i=0;i<50&&!(S.ch&&S.ch.m[S.ch.m.length-1].done);i++){await W(200);ok()}};
+const mv=el=>{const wr=w.getBoundingClientRect(),r=el.getBoundingClientRect();c.style.left=r.left-wr.left+Math.min(r.width/2,70)+'px';c.style.top=r.top-wr.top+r.height/2+'px'};
+const go=async(s,tip,sd)=>{await W(380);ok();const el=$(s);if(!el||!el.offsetParent)return;const p=el.closest('.bd,.ls,.csc');if(p){const pr=p.getBoundingClientRect(),r=el.getBoundingClientRect();if(r.top<pr.top||r.bottom>pr.bottom-30)p.scrollTop+=r.top-pr.top-pr.height/3}await W(220);ok();mv(el);if(tip){await gtip(el,...tip,2800,sd);ok();gHide();await W(150)}else await W(820);ok();c.classList.add('k');el.click();await W(180);c.classList.remove('k')};
+const on=async(s,tip,sd)=>{await W(300);ok();const el=$(s);if(!el)return;await gtip(el,...tip,3000,sd);ok();gHide()};
+const shw=async(k,n,t,x,gw)=>{await W(250);ok();tp(`.ah[data-v="${k}"]`);await W(gw?1400:450);ok();const h=$(`.ah[data-v="${k}"]`);if(h){mv(h);await gtip(h,n,t,x,3000,'l');ok();gHide()}};
+const sec=async(k,n,t,x)=>{await go(`.ah[data-v="${k}"]`);await shw(k,n,t,x,AIK.includes(k));S.o.delete(k);rBody();await W(120)};
+const typ=async(sel,q,cb)=>{const ta=$(sel);ta.value='';for(const ch of q){ta.value+=ch;cb(ta.value);await W(36);ok()}};
+const cat=async(i,n,t,x)=>{const s=`.rcr[data-v="rc:${i}"]`;await go(s);await W(250);ok();tp(s);await W(450);ok();await on(s,[n,t,x],'l');S.o.delete('rc:'+i);rBody()};
+const GI=EV.findIndex(e=>e[4]=='Globex pricing walkthrough');
+try{
+if(which!='cal'){TL='Email';TN=19;TPR='mail';trL();await W(700);
+await go('.cmpz',[1,'Write a new email','GTM Buddy works inside every email you write.']);await W(300);
+await go('[data-i="cto"]');await typ('[data-i="cto"]','lena@globex.example',v=>{S.cm.to=v;cmap()});await W(500);
+await on('.dch',[2,'Mapped to the right deal','From the recipient, GTM Buddy finds the matching opportunity in your CRM.']);
+await go('.dch');await on('.cpp',[3,'Switch the deal if needed','Pick any opportunity, account or lead.']);await go('.dch');
+await go('[data-i="csb"]');await typ('[data-i="csb"]','Next steps on the Globex rollout',v=>S.cm.sub=v);
+await go('[data-a="cmprep"]',[4,'Meeting Prep, right from the email','Deal context opens next to the message you are writing.']);await W(400);
+await sec('mt',5,'Previous meetings','Summaries and action items from every recorded call with this account.');
+await go('.ah[data-v="ar"]');await go('[data-v="ar:fi"]');await shw('ar',6,'Account research','Firmographics, industry shifts, challenges and the people map, generated on demand.',1);S.o.delete('ar');S.o.delete('ar:fi');rBody();
+await sec('su',7,'Deal summary','Where the deal stands and the next step, in plain language.');
+await sec('fu',8,'Follow up action items','Open commitments from calls. Tick them off as you go.');
+await sec('sn',9,'Deal snapshot','Live CRM fields: stage, amount, close date and products.');
+await sec('rk',10,'Deal risks','What could stall the deal, ranked by severity.');
+await sec('sh',11,'Stakeholders','Who is engaged, who is quiet, and how often you have met.');
+await go('[data-a="crc"]',[12,'Recommended content','Click Content for assets picked from the deal context in your CRM.']);
+await go('[data-a="rsn"][data-v="0"]');await on('.rsn',[13,'Why it is recommended','Star ratings and reasons show how well each asset fits this deal.'],'l');
+await go('[data-a="rf"][data-v="Case Study"]');await on('.fch',[14,'Filter by type','Narrow recommendations to case studies, competition, product and more.'],'l');
+await go('[data-a="radd"][data-v="Fabrikam Case Study"]',[15,'Add it to the email','The asset goes in as a tracked link.'],'l');await W(700);
+await go('[data-a="ctp"]',[16,'Email templates','Use your own templates or ones your enablement team created.']);await go('[data-a="cti"][data-v="1"]');await W(700);
+await go('textarea[data-i="tx"]',[17,'Ask Nucleus','Nucleus answers from your content, CRM and calls, and can write or enrich your email.']);await typ('textarea[data-i="tx"]','Draft a short pitch for Lena on governance',v=>S.tx=v);await go('[data-a="send"]');await wait();await go('[data-a="ins"]');await W(900);
+await go('[data-a="plus"]');await go('[data-v="skills"]');await on('.pop.s2',[18,'Prompts and skills','Saved prompts and skills turn deal data into ready-to-send work.'],'l');S.menu=null;rCmp();
+await go('[data-a="csend"]',[19,'Send and track','Opens and clicks are tracked, with an alert in Slack or Teams.']);await W(1600)}
+if(which!='mail'){TL='Calendar';TN=15;TPR='cal';trL();if(which=='cal')await W(500);
+await go('[data-a="app"][data-v="cal"]',[1,'Open your calendar','Meeting Prep lives in every customer meeting invite.']);
+await go(`[data-a="ev"][data-v="${GI}"]`,[2,'Open the meeting invite','Any meeting with customer guests gets a Meeting Prep button.']);
+await go('[data-a="prep"]',[3,'Click Meeting Prep','Everything for this meeting opens in one panel.']);await W(400);
+await go('[data-a="ctx"]');await on('.ctc',[4,'Deal context','Stage, industry, products and competitors from the CRM drive every suggestion.'],'l');await go('[data-a="ctx"]');
+await go('.rcr[data-v="rc:0"]');await W(250);tp('.rcr[data-v="rc:0"]');await on('.rcr[data-v="rc:0"]',[5,'Name drop','Happy customers in the same industry, with similar products or the same competitor.'],'l');
+await go('[data-v="rs0.0"]');await on('.rsn',[6,'Why this customer','Reasons for each recommendation, so you can name drop with confidence.'],'l');
+await go('[data-v="ci0.0"]');await go('[data-v="as0.0"]');await on('[data-v="as0.0"]',[7,'Customer info and evidence','Health, products and outcomes, plus the assets to back them up.'],'l');S.o.delete('rc:0');rBody();
+await cat(2,8,'Competitive intel','Battlecards and comparisons for the competitor on this deal.');
+await cat(4,9,'FAQs','Answers to the questions this buyer is most likely to ask.');
+await cat(7,10,'Coaching','Bite-sized training on pitching and asking the right questions.');
+await go('.rcr[data-v="rc:8"]');await W(200);await go('[data-v="pe8.0"]');await W(250);tp('.rcr[data-v="rc:8"]');await on('.rcr[data-v="rc:8"]',[11,'Persona cards','Each persona\'s goals, so you can steer the conversation.'],'l');S.o.delete('rc:8');rBody();S.o.delete('rc');rBody();
+await sec('mt',12,'Recap the last call','What was said and what you promised, before you walk in.');
+await sec('cpl',13,'Call plan','Objective, agenda and the outcome to aim for.');
+await sec('sh',14,'Know who is attending','Roles, engagement and who still needs convincing.');
+await go('[data-a="prac"]',[15,'Rehearse with an AI buyer','Practice the conversation with a buyer modeled on the deal\'s real calls.']);await wait();await W(700);ok()}
+c.style.opacity=0;await gtip(null,0,'Your turn','Click anything in the inbox, calendar or panel. Everything here runs on sample data.',6000);ok();gHide()}catch(e){}
+if(id==run){S.tour=0;c.style.opacity=0;gHide();trL()}}
+R.addEventListener('pointerdown',e=>{if(e.isTrusted&&S.tour&&!e.target.closest('[data-a="tour"],[data-a="vo"],.gt'))stop()},true);
+init();shell();rAll();
+const ob=new IntersectionObserver(x=>{if(x[0].isIntersecting){ob.disconnect();tour()}},{threshold:.45});ob.observe(R);
+};if(window.GBXD)GBXA();
+</script>
+</main>
+</body>
+</html>
